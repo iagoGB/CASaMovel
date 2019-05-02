@@ -1,9 +1,36 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two
+      Eventos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content class="ion-padding">
+    <ion-list> <!--  #scheduleList [hidden]="shownSessions === 0" -->
+        <ion-item-group> <!-- [hidden]="group.hide -->
+    
+          <ion-item-sliding>
+
+            <ion-item *ngFor = "let event of events"> <!-- routerLink="/app/tabs/schedule/session/{{session.id}} -->
+              <ion-label>
+                <ion-header>{{ event.title }}</ion-header>
+                <p class=" no-margin"> {{ event.date }}  </p>
+                <p class="no-margin"><strong>Carga Horária:</strong> {{ event.hour }}</p>
+              </ion-label>
+              <ion-button slot="end">></ion-button>
+            </ion-item>
+
+          </ion-item-sliding>
+
+        </ion-item-group>
+    </ion-list>
+
+  
+</ion-content>
+
+<!--
+  <ion-item *ngFor = "let event of events">
+    {{ event.id}}, {{ event.title }}, {{ event.location }}
+  </ion-item>
+</ion-list> -->
