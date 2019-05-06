@@ -13,7 +13,7 @@ export class Tab2Page {
   private events: Event[];
 
   constructor(private http: HttpService){
-
+    
   }
 
   ngOnInit(){

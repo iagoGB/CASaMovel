@@ -3,11 +3,14 @@
     <ion-title>
       Eventos
     </ion-title>
+    <ion-button fill="clear" size="small" slot="end" [routerLink]="['/new-event']">
+      <ion-icon size="large" name="add"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-    <ion-list> <!--  #scheduleList [hidden]="shownSessions === 0" -->
+    <ion-list *ngIf = "events"> <!--  #scheduleList [hidden]="shownSessions === 0" -->
         <ion-item-group> <!-- [hidden]="group.hide -->
     
           <ion-item-sliding>
@@ -15,20 +18,24 @@
             <ion-item *ngFor = "let event of events"> <!-- routerLink="/app/tabs/schedule/session/{{session.id}} -->
               <ion-label>
                 <ion-header>{{ event.title }}</ion-header>
-                <p class=" no-margin"> {{ event.date }}  </p>
+                <p class=" no-margin italic"> {{ event.date }}  </p>
                 <p class="no-margin"><strong>Carga Horária:</strong> {{ event.hour }}</p>
               </ion-label>
-              <ion-button slot="end">></ion-button>
+              <ion-button fill="clear">
+                <ion-icon size="small" name="arrow-forward"></ion-icon>
+              </ion-button>
             </ion-item>
 
           </ion-item-sliding>
 
         </ion-item-group>
     </ion-list>
-
-  
 </ion-content>
 
+
+<div class="ion-center">
+  <p *ngIf="!events">Carregando...</p>
+</div>
 <!--
   <ion-item *ngFor = "let event of events">
     {{ event.id}}, {{ event.title }}, {{ event.location }}
