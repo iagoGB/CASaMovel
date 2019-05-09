@@ -36,7 +36,11 @@ export class HttpService {
     //pipe take 1 - Faz a requisição apenas uma única vez e encerra o observable automaticamente
   }
 
-  
+  // Requisição para o servidor deletar registro
+  removeEvent(toDeleteEvent: Event){
+    return this.http.delete(this.url+this.events+'/'+toDeleteEvent.id).pipe(take(1));
+    //pipe take 1 - Faz a requisição apenas uma única vez e encerra o observable automaticamente
+  }
  
 
 }

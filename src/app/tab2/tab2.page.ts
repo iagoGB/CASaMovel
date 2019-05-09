@@ -14,16 +14,51 @@ export class Tab2Page {
 
   private events: Event[];
 
-  constructor (
+  constructor ( 
+    //Injeção das dependências 
     private http: HttpService, 
     private alertController: AlertController,
     private  location: Location 
   ) { };
 
   ngOnInit(){
+    //Solicitar listagem de eventos ao iniciar componente
     this.http.getEvents()
     .subscribe(data => this.events = data);
   }
 
+  //Evento assincrono para exibir modal ao clicar em deletar 
+  async onDeleteConfirm ( event: Event ) {
+    
+    const alert = await this.alertController.create({
+      header: 'Confirmar!',
+      message: 'Tem certeza que deseja excluir o evento: <strong>' + event.title + '</strong>',
+      buttons: [
+        {
+          //Botão de cancelar
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, 
+        {
+          //Botão de confirmar
+          text: 'Sim',
+          handler: ( ) => {
+            this.remove(event);
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  //Evento para solicitar a ação de delete ao serviço http.
+  remove( event: Event ): void {
+    this.http.removeEvent(event).subscribe();
+  }
   
 }
