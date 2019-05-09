@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-    <ion-list *ngIf = "events"> <!--  #scheduleList [hidden]="shownSessions === 0" -->
+    <ion-list *ngIf ="events"> <!--  #scheduleList [hidden]="shownSessions === 0" -->
         <ion-item-group> <!-- [hidden]="group.hide -->
     
           <ion-item-sliding>
@@ -21,9 +21,12 @@
                 <p class=" no-margin italic"> {{ event.date }}  </p>
                 <p class="no-margin"><strong>Carga Horária:</strong> {{ event.hour }}</p>
               </ion-label>
-              <ion-button fill="clear">
+              <ion-button class="no-margin no-padding" [routerLink]="['/edit-event',event.id]">Editar</ion-button>
+              <ion-button class="no-margin no-padding" (click)="onDeleteConfirm(event);">Deletar</ion-button>
+              <ion-button fill="clear" (click)="edit(event.id);">
                 <ion-icon size="small" name="arrow-forward"></ion-icon>
               </ion-button>
+             
             </ion-item>
 
           </ion-item-sliding>

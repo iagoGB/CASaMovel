@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Evento</ion-title>
+    <ion-back-button text="Voltar"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Titulo do Evento </ion-label>
+      <ion-input [(ngModel)] ="newEvent.title" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Palestrante(s)</ion-label>
+      <ion-button color="primary" fill="clear" slot="end"><ion-icon size="large" name="add"></ion-icon></ion-button>
+      <ion-input [(ngModel)] ="newEvent.palestrante" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Data do Evento</ion-label>
+      <ion-datetime pickerFormat="DD/MMMM/YYYY" displayFormat="DD MMMM YYYY" [(ngModel)]="newEvent.date"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Local</ion-label>
+      <ion-input  [(ngModel)]="newEvent.location" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Carga Horária</ion-label>
+      <ion-input  [(ngModel)]="newEvent.hour" type="number"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button size="block"  (click)= "updateEvent()">ATUALIZAR</ion-button>
+</ion-content>
+
