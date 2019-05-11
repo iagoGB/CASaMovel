@@ -22,7 +22,17 @@ export class Tab2Page {
   ) { };
 
   ngOnInit(){
-    //Solicitar listagem de eventos ao iniciar componente
+    //Função para se inscrever na função http que requer atualização
+    this.http.refreshNeeded().
+    subscribe( () => { 
+      this.getEvents();
+      console.log("fez o refresh");
+    });
+    this.getEvents();
+  }
+
+  //Função que Solicita a listagem de eventos
+  private getEvents(): void {
     this.http.getEvents()
     .subscribe(data => this.events = data);
   }

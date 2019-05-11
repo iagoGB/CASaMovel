@@ -6,7 +6,9 @@ const routes: Routes = [
   { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'new-event', loadChildren: './tab2/new-event/new-event.module#NewEventPageModule' },
-  { path: 'edit-event/:id', loadChildren: './tab2/edit-event/edit-event.module#EditEventPageModule' }
+  { path: 'edit-event/:id', loadChildren: './tab2/edit-event/edit-event.module#EditEventPageModule' },
+  { path: 'detail-event/:id', loadChildren: './tab2/detail-event/detail-event.module#DetailEventPageModule' }
+
 ];
 @NgModule({
   imports: [

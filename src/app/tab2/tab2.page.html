@@ -8,7 +8,6 @@
     </ion-button>
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="ion-padding">
     <ion-list *ngIf ="events"> <!--  #scheduleList [hidden]="shownSessions === 0" -->
         <ion-item-group> <!-- [hidden]="group.hide -->
@@ -17,13 +16,20 @@
 
             <ion-item *ngFor = "let event of events"> <!-- routerLink="/app/tabs/schedule/session/{{session.id}} -->
               <ion-label>
-                <ion-header>{{ event.title }}</ion-header>
+                <ion-header>
+                    {{ event.title }}
+                    <ion-button slot="end" class="no-margin no-padding" [routerLink]="['/edit-event',event.id]">
+                      <ion-icon size="small" name="create"></ion-icon>
+                    </ion-button>
+                    <ion-button slot="end" class="no-margin no-padding" (click)="onDeleteConfirm(event);">
+                      <ion-icon size="small" name="trash"></ion-icon>
+                    </ion-button>
+                </ion-header>
                 <p class=" no-margin italic"> {{ event.date }}  </p>
                 <p class="no-margin"><strong>Carga Horária:</strong> {{ event.hour }}</p>
               </ion-label>
-              <ion-button class="no-margin no-padding" [routerLink]="['/edit-event',event.id]">Editar</ion-button>
-              <ion-button class="no-margin no-padding" (click)="onDeleteConfirm(event);">Deletar</ion-button>
-              <ion-button fill="clear" (click)="edit(event.id);">
+             
+              <ion-button fill="clear" [routerLink]="['/detail-event',event.id]">
                 <ion-icon size="small" name="arrow-forward"></ion-icon>
               </ion-button>
              

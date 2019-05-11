@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button></ion-back-button>
+    <ion-title>detail-event</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img class="ion-padding" src="http://www.casa.ufc.br/wp-content/uploads/2019/05/14-05-2019-laboratorio-de-praticas-docentes.corrigido.jpg"></ion-img> <!-- src="http://www.fjmangabeira.org.br/wp-content/uploads/2017/05/Curso.jpg"-->
+  <ion-list class="ion-padding" *ngIf="event">
+    <ion-header>
+      {{event.id}}: {{event.title}}
+    </ion-header>
+    <p>{{event.location}}</p>
+    <p>{{event.speakers}}</p>
+    <p>{{event.date}}</p>
+    <p>{{event.hour}}</p>
+    <ion-button size="block">PARTICIPAR</ion-button>
+  </ion-list>
+ 
+</ion-content>

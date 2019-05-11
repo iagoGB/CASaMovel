@@ -1,8 +1,11 @@
-import { Event } from './../../models/models';
 import { Component, OnInit } from '@angular/core';
 
 import { HttpService } from './../../services/http.service';
+import { Event } from './../../models/models';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-edit-event',
@@ -25,7 +28,10 @@ export class EditEventPage implements OnInit {
 
   constructor (
     private http:HttpService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location,
+    private toastController: ToastController
+    
   ) { }
 
   ngOnInit() {
@@ -35,7 +41,8 @@ export class EditEventPage implements OnInit {
         console.log(id);
         const event$ = this.http.loadByID(id);
         event$.subscribe (
-          event => { this.updateInput(event);
+          event => { 
+            this.updateInput(event);
         });
       }
     );
@@ -55,5 +62,23 @@ export class EditEventPage implements OnInit {
   updateEvent(){
     this.http.updateEvent(this.newEvent).subscribe(
     );
+    this.presentToast();
   }
+  
+  //Feedback positivo ao atualizar o evento.
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Evento atualizado!',
+      position: 'middle',
+      color:"dark",
+      showCloseButton: true,
+      closeButtonText:'x',
+      duration: 2000
+    });
+    toast.present();
+    //Tem que garantir que o usuário veio de um tela anterior para usar a função abaixo
+    this.location.back();
+    
+  }
+  
 }
