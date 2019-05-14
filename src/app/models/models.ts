@@ -8,3 +8,11 @@ export interface Event {
     "createAt": Date,
     "updateAt": Date
 }
+
+export interface User {
+    "id": number,
+    "name": string
+    "departament": string,
+    'ch': number,
+    'dateEntrace': Date
+}
