@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './services/http.service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,9 @@ import { HttpService } from './services/http.service';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     StatusBar,
@@ -27,6 +30,9 @@ import { HttpService } from './services/http.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     HttpService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports:[
+    ReactiveFormsModule
+  ]
 })
 export class AppModule {}

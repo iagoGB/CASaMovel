@@ -36,7 +36,7 @@ export class DetailEventPage implements OnInit {
         const id = params['id'];
         console.log(id);
         const event$ = this.http.loadByID(id);
-        event$.subscribe(
+        event$.subscribe (
           data => {
             this.event = data;
           }

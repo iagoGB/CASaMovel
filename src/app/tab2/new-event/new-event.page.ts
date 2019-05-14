@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from './../../services/http.service';
 import { Event } from './../../models/models';
 import { ToastController } from '@ionic/angular';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-event',
@@ -12,6 +13,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class NewEventPage implements OnInit {
 
+  formulario: FormGroup;
   private t: string = '';
 
   private newEvent: Event = {
@@ -32,29 +34,70 @@ export class NewEventPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    
+    //Construção do formulário reativo
+      this.formulario = new FormGroup({
+        title: new FormControl(null, Validators.required),
+        location: new FormControl(null, Validators.required),
+        speakers:new FormControl(null, Validators.required),
+        date: new FormControl(null, Validators.required),
+        hour: new FormControl(null, Validators.required),
+        creatAt: new FormControl(null),
+        updateAt: new FormControl(null)
+      });
+
+    /*
+      this.formulario = this.formBuilder.group ({
+        title: [null],
+        location: [null],
+        speakers:[ [null] ],
+        date: [null],
+        hour: [null],
+        creatAt: [null],
+        updateAt:[null]
+      });
+    */
+  }
+
   
+  
+
+  //Função para criação do evento
+  onSubmit(): void {
+    if (this.formulario.status === "INVALID"){
+      //Se o formulario estiver inválido, diga ao usuário
+      console.log(this.formulario.status);
+      console.log("Formulario invalido");
+      this.presentToast("Formulário inválido, por favor preecha corretamente os campos",'danger');
+    } 
+    else {
+      //Se o formulario estiver válido, mova para a variável evento 
+      this.newEvent = this.formulario.value;
+      //Envie para o servidor
+      this.http.createEvent(this.newEvent).subscribe(
+      );
+      console.log(this.formulario);
+      //Informe ao usuário que o evento foi criado
+      this.presentToast('Novo evento criado!','dark');
+      //Retorne pra tela de eventos
+      this.location.back();
+      /* Falta incluir  travativa de erros */
+    }
+
   }
 
-  create(): void {
-    this.http.createEvent(this.newEvent).subscribe(
-    );
-    console.log(this.newEvent);
-    this.presentToast();
-    /* Falta incluir refresh e travativa de erros */
 
-  }
-
-  async presentToast() {
+  //Feedback de situação para o usuário
+  async presentToast(msg: string,c: string) {
     const toast = await this.toastController.create({
-      message: 'Novo evento criado!',
+      message: msg,
       position: 'middle',
-      color:"dark",
+      color: c,
       showCloseButton: true,
       closeButtonText:'x',
       duration: 2000
     });
     toast.present();
-    this.location.back();
   }
 
 }
