@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './services/http.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth/auth.service';
+import { IonicStorageModule } from "@ionic/storage";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,8 @@ import { AuthService } from './services/auth/auth.service';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,
