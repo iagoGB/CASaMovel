@@ -1,3 +1,5 @@
+import { stringify } from '@angular/compiler/src/util';
+
 export interface Event {
     "id": number,
     "title": string,
@@ -7,6 +9,11 @@ export interface Event {
     "hour": number,
     "createAt": Date,
     "updateAt": Date
+}
+
+export class AuthUser {
+    credential: number;
+    password: string;
 }
 
 export interface User {

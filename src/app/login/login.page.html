@@ -8,12 +8,12 @@
   <ion-list>
     <ion-item>
       <ion-label color="primary" position="stacked">SIAPE</ion-label>
-      <ion-input  type="text"></ion-input>
+      <ion-input  type="text" [(ngModel)]="authUser.credential"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" position="stacked">Senha</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password"  [(ngModel)]="authUser.password"></ion-input>
     </ion-item>
-    <ion-button size="full" [routerLink]="['/tabs/tabs/tab1']" margin>Logar</ion-button>
+    <ion-button size="full"  margin (click)="Login(authUser);">Logar</ion-button> <!--[routerLink]="['/tabs/tabs/tab1']"-->
   </ion-list>
 </ion-content>

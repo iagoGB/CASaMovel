@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './services/http.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AuthService } from './services/auth/auth.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,11 +29,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    HttpService
+    HttpService,
+    AuthService
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
+  /*
   exports:[
     ReactiveFormsModule
-  ]
+  ] */
 })
 export class AppModule {}
