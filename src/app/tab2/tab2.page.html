@@ -17,7 +17,7 @@
             <ion-item *ngFor = "let event of events"> <!-- routerLink="/app/tabs/schedule/session/{{session.id}} -->
               <ion-label>
                 <ion-header>
-                    {{ event.title }}
+                    {{ event.titulo }}
                     <ion-button slot="end" class="no-margin no-padding" [routerLink]="['/edit-event',event.id]">
                       <ion-icon size="small" name="create"></ion-icon>
                     </ion-button>
@@ -25,8 +25,8 @@
                       <ion-icon size="small" name="trash"></ion-icon>
                     </ion-button>
                 </ion-header>
-                <p class=" no-margin italic"> {{ event.date }}  </p>
-                <p class="no-margin"><strong>Carga Horária:</strong> {{ event.hour }}</p>
+                <p class=" no-margin italic"> {{ event.dataHorario }}  </p>
+                <p class="no-margin"><strong>Carga Horária:</strong> {{ event.cargaHoraria }}</p>
               </ion-label>
              
               <ion-button fill="clear" [routerLink]="['/detail-event',event.id]">

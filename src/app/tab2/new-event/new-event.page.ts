@@ -17,14 +17,14 @@ export class NewEventPage implements OnInit {
   private t: string = '';
 
   private newEvent: Event = {
-    id: null,
-    title: "",
-    location: "",
-    speakers: [],
-    date: null,
-    hour: 0,
-    createAt: null,
-    updateAt: null
+    event_id: null,
+    titulo: "",
+    localizacao: "",
+    palestrante: "",
+    dataHorario: null,
+    cargaHoraria: 0,
+    createdAt: null,
+    updatedAt: null
   }
 
   constructor (
@@ -37,13 +37,11 @@ export class NewEventPage implements OnInit {
     
     //Construção do formulário reativo
       this.formulario = new FormGroup({
-        title: new FormControl(null, Validators.required),
-        location: new FormControl(null, Validators.required),
-        speakers:new FormControl(null, Validators.required),
-        date: new FormControl(null, Validators.required),
-        hour: new FormControl(null, Validators.required),
-        creatAt: new FormControl(null),
-        updateAt: new FormControl(null)
+        titulo: new FormControl(null, Validators.required),
+        localizacao: new FormControl(null, Validators.required),
+        palestrante:new FormControl(null, Validators.required),
+        dataHorario: new FormControl(null, Validators.required),
+        cargaHoraria: new FormControl(null, Validators.required)
       });
 
     /*
@@ -59,20 +57,20 @@ export class NewEventPage implements OnInit {
     */
   }
 
-  
-  
-
   //Função para criação do evento
   onSubmit(): void {
     if (this.formulario.status === "INVALID"){
       //Se o formulario estiver inválido, diga ao usuário
       console.log(this.formulario.status);
+      console.log(this.formulario.value);
       console.log("Formulario invalido");
       this.presentToast("Formulário inválido, por favor preecha corretamente os campos",'danger');
     } 
     else {
       //Se o formulario estiver válido, mova para a variável evento 
       this.newEvent = this.formulario.value;
+      this.newEvent.createdAt = this.newEvent.dataHorario;
+      this.newEvent.updatedAt = this.newEvent.dataHorario;
       //Envie para o servidor
       this.http.createEvent(this.newEvent).subscribe(
       );

@@ -1,14 +1,14 @@
 import { stringify } from '@angular/compiler/src/util';
 
 export interface Event {
-    "id": number,
-    "title": string,
-    "location": string,
-    "speakers": string[],
-    "date": Date,
-    "hour": number,
-    "createAt": Date,
-    "updateAt": Date
+    "event_id": number,
+    "titulo": string,
+    "localizacao": string,
+    "palestrante": string,
+    "dataHorario": Date,
+    "cargaHoraria": number,
+    "createdAt": Date,
+    "updatedAt": Date
 }
 
 export class AuthUser {

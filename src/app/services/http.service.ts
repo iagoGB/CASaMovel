@@ -11,7 +11,8 @@ import { take, tap } from 'rxjs/operators';
 
 
 export class HttpService {
-  private url: string = "http://localhost:3000";
+
+  private url: string = "http://localhost:8050";
   private events: string = "/events";
   private _refreshNeeded: Subject<void> = new Subject<void>();
 
@@ -19,8 +20,8 @@ export class HttpService {
     
   };
 
-  loadByID(id):any {
-    return this.http.get(this.url+this.events+"/"+id).pipe(take(1));
+  loadByID(event_id):any {
+    return this.http.get(this.url+this.events+"/"+event_id).pipe(take(1));
   }
 
   //Retorna a variavel responsável por fazer o refresh
@@ -30,6 +31,7 @@ export class HttpService {
 
   // Requisição para o servidor criar novo registro
   createEvent(newEvent: Event){
+    console.log(newEvent);
     return this.http.post(this.url+this.events,newEvent)
     .pipe(
       take(1),
@@ -46,7 +48,7 @@ export class HttpService {
   
   // Requisição para o servidor atualizar registro
   updateEvent(toUpdateEvent: Event) {
-    return this.http.put(this.url+this.events+'/'+toUpdateEvent.id,toUpdateEvent)
+    return this.http.put(this.url+this.events+'/'+toUpdateEvent.event_id,toUpdateEvent)
     .pipe(
       take(1),
       tap(() => {
@@ -58,7 +60,7 @@ export class HttpService {
 
   // Requisição para o servidor deletar registro
   removeEvent(toDeleteEvent: Event){
-    return this.http.delete(this.url+this.events+'/'+toDeleteEvent.id)
+    return this.http.delete(this.url+this.events+'/'+toDeleteEvent.event_id)
     .pipe(
       take(1),
       tap (

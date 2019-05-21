@@ -42,7 +42,7 @@ export class Tab2Page {
     
     const alert = await this.alertController.create({
       header: 'Confirmar!',
-      message: 'Tem certeza que deseja excluir o evento: <strong>' + event.title + '</strong>',
+      message: 'Tem certeza que deseja excluir o evento: <strong>' + event.titulo + '</strong>',
       buttons: [
         {
           //Botão de cancelar
