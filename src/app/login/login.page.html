@@ -7,13 +7,13 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-label color="primary" position="stacked">SIAPE</ion-label>
-      <ion-input  type="text" [(ngModel)]="authUser.credential"></ion-input>
+      <ion-label color="primary" position="stacked">EMAIL</ion-label>
+      <ion-input  type="text" [(ngModel)]="authUser.email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" position="stacked">Senha</ion-label>
-      <ion-input type="password"  [(ngModel)]="authUser.password"></ion-input>
+      <ion-input type="password"  [(ngModel)]="authUser.senha"></ion-input>
     </ion-item>
-    <ion-button size="full"  margin (click)="login();">Logar</ion-button> <!--[routerLink]="['/tabs/tabs/tab1']"-->
+    <ion-button size="full"  margin (click)="login(authUser);">Logar</ion-button> <!--[routerLink]="['/tabs/tabs/tab1']"-->
   </ion-list>
 </ion-content>

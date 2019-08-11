@@ -16,14 +16,14 @@ import { Location } from '@angular/common';
 export class EditEventPage implements OnInit {
 
   private newEvent: Event = {
-    id: null,
-    title: "",
-    location: "",
-    speakers: [""],
-    date: null, 
-    hour: 4, 
-    createAt: null,
-    updateAt: null
+    evento_id: null,
+    titulo: "",
+    localizacao: "",
+    palestrante: [""],
+    data_horario: null, 
+    carga_horaria:0, 
+    criado_em: null,
+    atualizado_em: null
  }
 
   constructor (
@@ -49,14 +49,14 @@ export class EditEventPage implements OnInit {
   }
 
   updateInput(data){
-    this.newEvent.id = data.id;
-    this.newEvent.title = data.title;
-    this.newEvent.location = data.location;
-    this.newEvent.speakers = data.speakers;
-    this.newEvent.date = data.date; 
-    this.newEvent.hour = data.hour;
-    this.newEvent.createAt = data.createAt;
-    this.newEvent.updateAt = data.updateAt;
+    this.newEvent.evento_id = data.id;
+    this.newEvent.titulo = data.title;
+    this.newEvent.localizacao = data.localizacao;
+    this.newEvent.palestrante = data.palestrante;
+    this.newEvent.carga_horaria = data.carga_horaria;
+    this.newEvent.data_horario = data.data_horario; 
+    this.newEvent.criado_em = data.criado_em;
+    this.newEvent.atualizado_em = data.atualizado_em;
   }
 
   updateEvent(){

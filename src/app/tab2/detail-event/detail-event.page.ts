@@ -13,14 +13,14 @@ import { Event } from 'src/app/models/models';
 export class DetailEventPage implements OnInit {
 
   private event: Event = {
-    id : null,
-    title: '',
-    date: null,
-    location: '',
-    speakers: [],
-    hour: 0,
-    createAt: null,
-    updateAt: null,
+    evento_id : null,
+    titulo: '',
+    data_horario: null,
+    localizacao: '',
+    palestrante: [],
+    carga_horaria: 0,
+    criado_em: null,
+    atualizado_em: null,
 
   }
 

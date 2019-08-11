@@ -48,7 +48,7 @@ export class HttpService {
   
   // Requisição para o servidor atualizar registro
   updateEvent(toUpdateEvent: Event) {
-    return this.http.put(this.url+this.events+'/'+toUpdateEvent.event_id,toUpdateEvent)
+    return this.http.put(this.url+this.events+'/'+toUpdateEvent.evento_id,toUpdateEvent)
     .pipe(
       take(1),
       tap(() => {
@@ -60,7 +60,7 @@ export class HttpService {
 
   // Requisição para o servidor deletar registro
   removeEvent(toDeleteEvent: Event){
-    return this.http.delete(this.url+this.events+'/'+toDeleteEvent.event_id)
+    return this.http.delete(this.url+this.events+'/'+toDeleteEvent.evento_id)
     .pipe(
       take(1),
       tap (

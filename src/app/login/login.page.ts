@@ -12,17 +12,24 @@ import { AuthService } from './../services/auth/auth.service';
 })
 export class LoginPage implements OnInit {
 
-  private authUser: AuthUser = new AuthUser();
+  private authUser: AuthUser = {
+    email: "",
+    senha: ""
+  };
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
-  login(/*user: AuthUser*/){
-    this.authService.login();
-    /*
-    this.authService.Login(user).subscribe();
-    console.log(user); */
+  login(user: AuthUser){
+    console.log("Dados que estão sendo enviados para o servidor: "+ user.email, "\n"+ user.senha);
+    this.authService.login(user).subscribe(
+      data => {
+        console.log("Autenticação bem sucedida. \n Token de acesso: "+ data.token);
+        this.authService.saveToken(data.token).then;
+      },
+      erro => console.error(erro) 
+    );
   }
 }

@@ -17,14 +17,14 @@ export class NewEventPage implements OnInit {
   private t: string = '';
 
   private newEvent: Event = {
-    event_id: null,
+    evento_id: null,
     titulo: "",
     localizacao: "",
-    palestrante: "",
-    dataHorario: null,
-    cargaHoraria: 0,
-    createdAt: null,
-    updatedAt: null
+    palestrante: [""],
+    data_horario: null,
+    carga_horaria: 0,
+    criado_em: null,
+    atualizado_em: null
   }
 
   constructor (
@@ -69,10 +69,11 @@ export class NewEventPage implements OnInit {
     else {
       //Se o formulario estiver válido, mova para a variável evento 
       this.newEvent = this.formulario.value;
-      this.newEvent.createdAt = this.newEvent.dataHorario;
-      this.newEvent.updatedAt = this.newEvent.dataHorario;
+      this.newEvent.criado_em = this.newEvent.data_horario;
+      this.newEvent.atualizado_em = this.newEvent.data_horario;
       //Envie para o servidor
       this.http.createEvent(this.newEvent).subscribe(
+        //Vai ter que esperar a resposta aqui para mostrar o present Toast;
       );
       console.log(this.formulario);
       //Informe ao usuário que o evento foi criado

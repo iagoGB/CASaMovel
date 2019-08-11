@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
 import { HttpService } from 'src/app/services/http.service';
-import { HttpClient } from '@angular/common/http';
-import { AuthUser } from './../../models/models';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient,HttpRequest, HttpHeaders } from '@angular/common/http';
+import { AuthUser, AuthResponse } from './../../models/models';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 
-const TOKEN_KEY = 'auth-token';
+const TOKEN_KEY: string = 'Authorization';
 
 
 @Injectable({
@@ -17,7 +17,7 @@ const TOKEN_KEY = 'auth-token';
 export class AuthService {
 
   public authState = new BehaviorSubject(false);
-  private url: string = "http://localhost:3000/users";
+  private url: string = "http://localhost:9999/login";
   
   constructor (
     private http: HttpClient,
@@ -29,12 +29,24 @@ export class AuthService {
     });
   }
 
-  login( /*user: AuthUser*/){
-    /*console.log(user);
-    return this.http.post(this.url,user);*/
+  login( user: AuthUser ):Observable<AuthResponse>{
+    var headers = new HttpHeaders();
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      headers.append('Accept','application/json');
+      headers.append('content-type','application/json');
+      console.log(headers);
+    return this.http.post<AuthResponse>(this.url,user,{headers: headers });
+    /*Funcional
     return this.storage.set(TOKEN_KEY,'Bear 123456').then( res => {
       this.authState.next(true);
-    });
+    });*/
+  }
+
+  saveToken(TOKEN){
+    return this.storage.set(TOKEN_KEY,TOKEN).then(
+      res => this.authState.next(true)
+    );
   }
 
   logout(){
