@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { HttpService } from 'src/app/services/http.service';
+import { EventService } from 'src/app/services/event/event.service';
 import { Event } from 'src/app/models/models';
 
 @Component({
@@ -25,7 +25,7 @@ export class DetailEventPage implements OnInit {
   }
 
   constructor (
-    private http: HttpService,
+    private http: EventService,
     private route: ActivatedRoute,
     private location: Location
   ) { }

@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { HttpService } from './services/http.service';
+import { EventService } from './services/event/event.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth/auth.service';
 import { IonicStorageModule } from "@ionic/storage";
@@ -31,7 +31,7 @@ import { IonicStorageModule } from "@ionic/storage";
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    HttpService,
+    EventService,
     AuthService
   ],
   bootstrap: [AppComponent]

@@ -1,10 +1,11 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
-import { HttpService } from './../../services/http.service';
+import { EventService } from '../../services/event/event.service';
 import { Event } from './../../models/models';
 import { ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/services/alert/alert.service';
 
 @Component({
   selector: 'app-new-event',
@@ -28,9 +29,9 @@ export class NewEventPage implements OnInit {
   }
 
   constructor (
-    private http:HttpService, 
-    private toastController:ToastController,
-    private location: Location
+    private http : EventService, 
+    private alertService : AlertService,
+    private location : Location
   ) { }
 
   ngOnInit() {
@@ -64,7 +65,7 @@ export class NewEventPage implements OnInit {
       console.log(this.formulario.status);
       console.log(this.formulario.value);
       console.log("Formulario invalido");
-      this.presentToast("Formulário inválido, por favor preecha corretamente os campos",'danger');
+      this.alertService.presentToast("Formulário inválido, por favor preecha corretamente os campos",'danger');
     } 
     else {
       //Se o formulario estiver válido, mova para a variável evento 
@@ -77,7 +78,7 @@ export class NewEventPage implements OnInit {
       );
       console.log(this.formulario);
       //Informe ao usuário que o evento foi criado
-      this.presentToast('Novo evento criado!','dark');
+      this.alertService.presentToast('Novo evento criado!','dark');
       //Retorne pra tela de eventos
       this.location.back();
       /* Falta incluir  travativa de erros */
@@ -86,17 +87,6 @@ export class NewEventPage implements OnInit {
   }
 
 
-  //Feedback de situação para o usuário
-  async presentToast(msg: string,c: string) {
-    const toast = await this.toastController.create({
-      message: msg,
-      position: 'middle',
-      color: c,
-      showCloseButton: true,
-      closeButtonText:'x',
-      duration: 2000
-    });
-    toast.present();
-  }
+ 
 
 }

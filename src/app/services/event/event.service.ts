@@ -1,4 +1,4 @@
-import { Event } from './../models/models';
+import { Event } from '../../models/models';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,9 +10,9 @@ import { take, tap } from 'rxjs/operators';
 })
 
 
-export class HttpService {
+export class EventService {
 
-  private url: string = "http://localhost:8050";
+  private url: string = "http://localhost:9999";
   private events: string = "/events";
   private _refreshNeeded: Subject<void> = new Subject<void>();
 

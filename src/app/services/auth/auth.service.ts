@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { HttpService } from 'src/app/services/http.service';
 import { HttpClient,HttpRequest, HttpHeaders } from '@angular/common/http';
 import { AuthUser, AuthResponse } from './../../models/models';
 import { BehaviorSubject, Observable } from 'rxjs';

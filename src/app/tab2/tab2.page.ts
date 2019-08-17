@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { HttpService } from '../services/http.service';
+import { EventService } from '../services/event/event.service';
 import { Event } from './../models/models';
 import { Location } from '@angular/common';
 import { AlertController } from '@ionic/angular';
@@ -16,7 +16,7 @@ export class Tab2Page {
 
   constructor ( 
     //Injeção das dependências 
-    private http: HttpService, 
+    private http: EventService, 
     private alertController: AlertController,
     private  location: Location 
   ) { };

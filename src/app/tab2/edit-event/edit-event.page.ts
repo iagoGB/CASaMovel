@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HttpService } from './../../services/http.service';
+import { EventService } from '../../services/event/event.service';
 import { Event } from './../../models/models';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -27,7 +27,7 @@ export class EditEventPage implements OnInit {
  }
 
   constructor (
-    private http:HttpService,
+    private http:EventService,
     private route: ActivatedRoute,
     private location: Location,
     private toastController: ToastController
