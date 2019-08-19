@@ -23,7 +23,7 @@ export class AlertService {
         color: color,
         showCloseButton: true,
         closeButtonText:'x',
-        duration: 2000
+        duration: 3000
       });
       toast.present();
     }

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>admin-dashboard</ion-title>
+    <ion-button class="invert" no-margin  size="small" fill="clear" slot="start" (click)="logout();">
+        <ion-icon size="large" name="exit"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content ion-padding>
+  <ion-grid justify-content-center ion-padding>
+    <ion-row>
+      <ion-col size="6" align-item-center>
+          <ion-button size="large">
+            <ion-icon name="calendar" slot="start"></ion-icon>
+            Eventos
+          </ion-button>
+      </ion-col>
+      <ion-col size="6">
+          <ion-button size="large">
+              <ion-icon name="contacts" slot="start"></ion-icon>
+              Usuários
+          </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-button size="large">
+                <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+               Ajuda
+            </ion-button>
+        </ion-col>
+        <ion-col>
+            <ion-button size="large">
+              <ion-icon size="large" name="settings" slot="start"></ion-icon>
+              {{ "   " }} Outros
+            </ion-button>
+        </ion-col>
+    </ion-row>   
+  </ion-grid>
+  
+</ion-content>

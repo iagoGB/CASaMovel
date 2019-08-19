@@ -1,19 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label color="primary" position="stacked">EMAIL</ion-label>
-      <ion-input  type="text" [(ngModel)]="authUser.email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" position="stacked">Senha</ion-label>
-      <ion-input type="password"  [(ngModel)]="authUser.senha"></ion-input>
-    </ion-item>
-    <ion-button size="full"  margin (click)="login(authUser);">Logar</ion-button> <!--[routerLink]="['/tabs/tabs/tab1']"-->
-  </ion-list>
+<ion-content >
+  <ion-grid class="vertical-align-content ion-justify-content-center">
+      <ion-row  justify-content-center align-items-center style="height: 100vh">
+        <ion-col size="12">
+          <ion-img src="../assets/images/casaLogin.png"></ion-img>
+        </ion-col>
+        <ion-list>
+          <ion-col size="3" size-lg>
+            <ion-item >
+              <ion-label color="primary" position="stacked">Email</ion-label>
+              <ion-input  type="text" [(ngModel)]="authUser.email"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="3" size-lg>
+          <ion-item>
+            <ion-label color="primary" position="stacked">Senha</ion-label>
+            <ion-input type="password"  [(ngModel)]="authUser.senha"></ion-input>
+          </ion-item>
+          </ion-col>
+          <ion-button size="block"  margin (click)="login(authUser);">Logar</ion-button> <!--[routerLink]="['/tabs/tabs/tab1']"-->
+        </ion-list>
+      </ion-row>
+  </ion-grid>
 </ion-content>

@@ -27,12 +27,12 @@ export class AppComponent {
       this.splashScreen.hide();
       this.authService.authState.subscribe( state => {
         console.log("Auth state: " , state);
-        if (state){
+        /*if (state){
           this.router.navigate(['tabs/tabs/tab1']);
         } else {
-          this.router.navigate(['login']);
-        }
-      });
+          this.router.navigate(['login']); 
+        }*/
+      }); 
     });
   }
 }
