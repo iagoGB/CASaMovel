@@ -1,25 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Olá {{ " Usuário " }}
-    </ion-title>
-    <ion-button class="invert" slot="start" fill="clear" (click)="logout();">
-      <ion-icon name="exit"></ion-icon>
-    </ion-button>
-    <ion-button  slot="end" fill="clear" (click)="changeTheme();">
-      <ion-icon name="contrast"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-    <ion-card class="welcome-card">
+<app-header></app-header>
+<ion-content padding>
+  <div class="ctn">
+    <ion-text><h1>Bem vindo ao CASa Móvel</h1></ion-text>
       <ion-img src="../assets/images/casaLogin.png"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>Visite nosso site</ion-card-subtitle>
-        <ion-card-title>Bem vindo ao CASa Móvel</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-         <p>A Comunidade de Cooperação e Aprendizagem Significativa (CASa) é o programa de formação docente da Universidade Federal do Ceará (UFC), criado em maio de 2009 pela Pró-Reitoria de Graduação (PROGRAD), no contexto da expansão e interiorização da educação superior gerado pelo Programa de Apoio a Planos de Reestruturação e Expansão das Universidades Federais (REUNI)</p>      </ion-card-content>
-    </ion-card>
+    <p>
+      A Comunidade de Cooperação e Aprendizagem Significativa (CASa) é o programa de formação
+      docente da Universidade Federal do Ceará (UFC), criado em maio de 2009 pela Pró-Reitoria 
+      de Graduação (PROGRAD), no contexto da expansão e interiorização da educação superior gerado pelo 
+      Programa de Apoio a Planos de Reestruturação e Expansão das Universidades Federais (REUNI)
+    </p>
+  </div>
 </ion-content>

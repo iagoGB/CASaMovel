@@ -16,8 +16,11 @@ import { AuthService } from './services/auth/auth.service';
 import { IonicStorageModule } from "@ionic/storage";
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent
+  ],
+  entryComponents: [
+  ],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
