@@ -1,6 +1,9 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+// Impot font family
+@import '../assets/fonts/helvetica-rounded/style.css';
+
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
@@ -78,7 +81,7 @@
 
 :root {
   .highContrast-theme{
-      --ion-font-family: helvetica;
+      --ion-font-family: 'Helvetica Rounded LT Std Black Oblique';
       --ion-background-color: #000000;
       --ion-text-color: #ffffff;
       --ion-border-color: #ffff00;
@@ -90,10 +93,20 @@
 
 :root {
   .default-theme{
-    --ion-font-family: 'helvetica';
+     //Main color
+    --ion-color-main-rgb: 12,94,143;
+    --ion-color-main-contrast: #ffffff;
+    --ion-color-main-contrast-rgb: 255,255,255;
+    --ion-color-main-shade: #0b537e;
+    --ion-color-main-tint: #246e9a;
+
+    --ion-font-family: 'Helvetica Rounded LT Std Bold Condensed';
+    --ion-font-size: 20px;
     --ion-background-color: #ffffff;
     --ion-text-color: #0C5E8F;
     --ion-border-color:#0C5E8F;
+    --ion-color-main: #0C5E8F;
+   
 
     ion-button{
       --background: #0C5E8F;
@@ -105,7 +118,7 @@
       --border: #ffffff;
     }
     ion-tab-button {
-      --color: #979292;
+      --color: #d2d2dbee;
       --color-selected: #ffffff;
     }
     ion-toolbar{
@@ -114,6 +127,15 @@
       --color: #ffffff;
       
     }
+  }
+
+  .ion-color-main {
+    --ion-color-base: var(--ion-color-main);
+    --ion-color-base-rgb: var(--ion-color-main-rgb);
+    --ion-color-contrast: var(--ion-color-main-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-main-contrast-rgb);
+    --ion-color-shade: var(--ion-color-main-shade);
+    --ion-color-tint: var(--ion-color-main-tint);
   }
 
 }

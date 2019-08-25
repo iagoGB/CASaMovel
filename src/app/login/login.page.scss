@@ -1,3 +1,40 @@
-.list-md{
-    margin-top: -80px;
+.container{
+    height:100vh;
+    margin: 0px 25px 0px 25px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: initial;
+}
+
+ion-button {
+    margin-top: 25px;
+    --box-shadow: 3px 3px 3px #000000; 
+    --padding-top: -5px; --padding-bottom: -5px;
+}
+
+ion-checkbox{
+    --border-color: var(--ion-color-base);
+    margin-bottom: none;
+}
+
+ion-label.check{
+    font-size: 20px !important;
+    padding-top: 5px;
+    margin-left: 5px;
+}
+
+ion-label.stacked{
+    font-size:29px !important;
+}
+
+ion-icon{
+    color: var(--ion-color-base);
+    margin-bottom: 5px;
+    margin-left: -2px;
+    margin-right: 5px;
+}
+
+a{
+    margin-left: 5px;
 }
