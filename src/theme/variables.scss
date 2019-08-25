@@ -75,3 +75,45 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 }
+
+:root {
+  .highContrast-theme{
+      --ion-font-family: helvetica;
+      --ion-background-color: #000000;
+      --ion-text-color: #ffffff;
+      --ion-border-color: #ffff00;
+      --ion-tab-bar-border-color: #ffff00;
+      --ion-tab-bar-color-activated: #ffff00;
+      --ion-toolbar-border-color: #ffff00;
+    }
+}
+
+:root {
+  .default-theme{
+    --ion-font-family: 'helvetica';
+    --ion-background-color: #ffffff;
+    --ion-text-color: #0C5E8F;
+    --ion-border-color:#0C5E8F;
+
+    ion-button{
+      --background: #0C5E8F;
+      --color: #ffffff;
+    }
+
+    ion-tab-bar {
+      --background: #0C5E8F;
+      --border: #ffffff;
+    }
+    ion-tab-button {
+      --color: #979292;
+      --color-selected: #ffffff;
+    }
+    ion-toolbar{
+      --background: #0C5E8F;
+      --border: #0C5E8F;
+      --color: #ffffff;
+      
+    }
+  }
+
+}
