@@ -81,18 +81,48 @@
 
 :root {
   .highContrast-theme{
-      --ion-font-family: 'Helvetica Rounded LT Std Black Oblique';
+      //Title font
+      --ion-title-family: 'Helvetica Rounded LT Std Bold';
+      .title {
+        font-family: var(--ion-title-family) !important;
+      }
+      --ion-font-family: 'Helvetica';
       --ion-background-color: #000000;
+      --ion-backdrop-color:red;
       --ion-text-color: #ffffff;
       --ion-border-color: #ffff00;
-      --ion-tab-bar-border-color: #ffff00;
+      --ion-tab-bar-border-color: #ffff00 !important;
       --ion-tab-bar-color-activated: #ffff00;
       --ion-toolbar-border-color: #ffff00;
+      --ion-toolbar-background: #green;
+      --ion-toolbar-color: #ffffff;
+      --ion-border-color:#ffff00;
+
+      ion-tabs{
+        --border-color: #ffff00 !important;
+      }
+
+      ion-header{
+        border-style: solid !important; 
+        border-color: #ffff00 !important;
+      }
+
+      ion-toolbar ion-button{
+        --background: #000000;
+        --color: #ffffff;
+        --border-style: solid !important;
+        --border-color: #ffff00 !important;
+      }
     }
 }
 
 :root {
   .default-theme{
+    //Title font
+    --ion-title-family: 'Helvetica Rounded LT Std Bold';
+    .title {
+      font-family: var(--ion-title-family) !important;
+    }
      //Main color
     --ion-color-main-rgb: 12,94,143;
     --ion-color-main-contrast: #ffffff;
@@ -100,17 +130,17 @@
     --ion-color-main-shade: #0b537e;
     --ion-color-main-tint: #246e9a;
 
-    --ion-font-family: 'Helvetica Rounded LT Std Bold Condensed';
+    --ion-font-family: 'Helvetica';
     --ion-font-size: 20px;
     --ion-background-color: #ffffff;
     --ion-text-color: #0C5E8F;
     --ion-border-color:#0C5E8F;
     --ion-color-main: #0C5E8F;
-   
 
     ion-button{
       --background: #0C5E8F;
       --color: #ffffff;
+      --border-color: none;
     }
 
     ion-tab-bar {
