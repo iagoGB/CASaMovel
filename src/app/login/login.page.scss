@@ -1,6 +1,6 @@
 .container{
     height:100vh;
-    margin: 0px 25px 0px 25px;
+    margin: 0px 20px 0px 20px;
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -17,25 +17,30 @@ ion-button {
 ion-checkbox{
     --border-color: var(--ion-color-base);
     margin-bottom: none;
+    margin-left: 1px;
 }
 
 ion-label.check{
-    font-size: 20px !important;
-    padding-top: 5px;
-    margin-left: 5px;
+    font-size: 16px !important;
+    padding-top: 1.5px;
+    margin-left: 4px;
 }
 
 ion-label.stacked{
-    font-size:29px !important;
+    font-size:25px !important;
+    margin-bottom: 10px;
 }
 
 ion-icon{
     color: var(--ion-color-base);
-    margin-bottom: 5px;
     margin-left: -2px;
-    margin-right: 5px;
+    margin-bottom: 2px;
+    margin-right: 2px;
+}
+ion-text,a{
+    font-size: 16px;
 }
 
 a{
-    margin-left: 5px;
+    padding-left: 3px;
 }
