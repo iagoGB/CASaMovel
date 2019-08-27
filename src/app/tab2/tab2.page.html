@@ -34,8 +34,13 @@
 </ion-content>
 
 
-<div class="ion-center">
-  <p *ngIf="!events">Carregando...</p>
+<div *ngIf="!error">
+ <ion-text><p>Carregando...</p></ion-text>
+</div>
+
+<div *ngIf="error">
+  <ion-text><p>Erro, tente novamente mais tarde<p></ion-text>
+  <ion-button>retry</ion-button> 
 </div>
 <!--
   <ion-item *ngFor = "let event of events">

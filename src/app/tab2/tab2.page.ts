@@ -4,6 +4,8 @@ import { EventService } from '../services/event/event.service';
 import { Event } from './../models/models';
 import { Location } from '@angular/common';
 import { AlertController } from '@ionic/angular';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AlertService } from '../services/alert/alert.service';
 
 @Component({
   selector: 'app-tab2',
@@ -13,16 +15,19 @@ import { AlertController } from '@ionic/angular';
 export class Tab2Page {
 
   private events: Event[];
+  public error: boolean;
 
   constructor ( 
     //Injeção das dependências 
     private http: EventService, 
     private alertController: AlertController,
+    private alertService: AlertService,
     private  location: Location 
   ) { };
 
   ngOnInit(){
     //Função para se inscrever na função http que requer atualização
+    this.error = false;
     this.http.refreshNeeded().
     subscribe( () => { 
       this.getEvents();
@@ -31,10 +36,17 @@ export class Tab2Page {
     this.getEvents();
   }
 
+  ngOnDestroy(){
+  }
   //Função que Solicita a listagem de eventos
   private getEvents(): void {
     this.http.getEvents()
-    .subscribe(data => this.events = data);
+    .subscribe(
+      data => this.events = data,
+      (erro: HttpErrorResponse) => {
+        this.error = true;
+        this.alertService.presentToast(erro.message, 'danger');
+      });
   }
 
   //Evento assincrono para exibir modal ao clicar em deletar 

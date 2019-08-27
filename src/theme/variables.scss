@@ -98,6 +98,10 @@
       --ion-toolbar-color: #ffffff;
       --ion-border-color:#ffff00;
 
+      ion-text {
+        color: #ffffff !important;
+      }
+
       ion-tabs{
         --border-color: #ffff00 !important;
       }
@@ -141,6 +145,10 @@
       --background: #0C5E8F;
       --color: #ffffff;
       --border-color: none;
+    }
+
+    ion-text {
+      color: #0C5E8F !important;
     }
 
     ion-tab-bar {
