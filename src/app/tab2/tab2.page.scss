@@ -1,22 +1,23 @@
-ion-header {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
 
-.italic {
-    font-style: italic;
-}
-
-div {
-    overflow: hidden;
-    height: 100%;
+div{
+    height:100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    
+    justify-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 0px 20px 0px 10px;
 }
 
+.avatar{
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    margin-bottom: 5em;
+}
 
-
-
-
+.highContrast-theme {
+    .avatar {
+        border: solid 1px yellow !important; 
+    }
+}

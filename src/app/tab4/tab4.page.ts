@@ -9,10 +9,10 @@ import { User } from '../models/models';
 export class Tab4Page implements OnInit {
   private user: User = {
     id: 1,
-    name: "Professor X",
-    departament:"STI",
-    dateEntrace: null,
-    ch: 5
+    nome: "Professor X",
+    departamento:"STI",
+    data_entrada: null,
+    carga_horaria: 5
   }
   constructor() { }
 

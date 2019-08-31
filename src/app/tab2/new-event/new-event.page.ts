@@ -19,6 +19,7 @@ export class NewEventPage implements OnInit {
 
   private newEvent: Event = {
     evento_id: null,
+    imagem: "",
     titulo: "",
     localizacao: "",
     palestrante: [""],
@@ -38,6 +39,7 @@ export class NewEventPage implements OnInit {
     
     //Construção do formulário reativo
       this.formulario = new FormGroup({
+        imagem: new FormControl(null, Validators.required),
         titulo: new FormControl(null, Validators.required),
         localizacao: new FormControl(null, Validators.required),
         palestrante:new FormControl(null, Validators.required),
@@ -58,6 +60,12 @@ export class NewEventPage implements OnInit {
     */
   }
 
+  //Checkar arquivos
+  inputFileChange(event){
+    if (event.target.files && event.target.files[0]){
+      const img = event.taret.files[0];
+    }
+  }
   //Função para criação do evento
   onSubmit(): void {
     if (this.formulario.status === "INVALID"){

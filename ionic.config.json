@@ -1,5 +1,7 @@
 {
   "name": "casaMovel",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

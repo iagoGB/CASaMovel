@@ -2,6 +2,7 @@ import { stringify } from '@angular/compiler/src/util';
 
 export interface Event {
     "evento_id": number,
+    "imagem": string,
     "titulo": string,
     "localizacao": string,
     "palestrante": string[],
@@ -24,8 +25,8 @@ export interface AuthResponse{
 
 export interface User {
     "id": number,
-    "name": string
-    "departament": string,
-    'ch': number,
-    'dateEntrace': Date
+    "nome": string
+    "departamento": string,
+    'carga_horaria': number,
+    'data_entrada': Date
 }

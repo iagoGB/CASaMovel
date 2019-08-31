@@ -8,6 +8,9 @@
 <ion-content class="ion-padding">
   <form [formGroup]="formulario">
     <ion-item>
+      <input type="file" name="image" id="image" (change)="inputFileChange($event)">
+    </ion-item>
+    <ion-item>
       <ion-label color="primary" position="stacked">Titulo do Evento </ion-label>
       <ion-input  type="text" formControlName="titulo"></ion-input>
     </ion-item>

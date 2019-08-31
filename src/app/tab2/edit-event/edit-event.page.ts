@@ -17,6 +17,7 @@ export class EditEventPage implements OnInit {
 
   private newEvent: Event = {
     evento_id: null,
+    imagem: null,
     titulo: "",
     localizacao: "",
     palestrante: [""],

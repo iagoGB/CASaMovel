@@ -1,2 +1,49 @@
 <app-header></app-header>
-<ion-content></ion-content>
+  <!-- Conteudo-->
+<ion-content class="ion-padding">
+    <ion-list *ngIf ="events"> <!--  #scheduleList [hidden]="shownSessions === 0" -->
+        <ion-item-group> <!-- [hidden]="group.hide -->
+    
+          <ion-item-sliding>
+
+            <ion-item *ngFor = "let event of events"> <!-- routerLink="/app/tabs/schedule/session/{{session.id}} -->
+              <ion-label>
+                <ion-header>
+                    {{ event.titulo }}
+                    <ion-button slot="end" class="no-margin no-padding" [routerLink]="['/edit-event',event.id]">
+                      <ion-icon size="small" name="create"></ion-icon>
+                    </ion-button>
+                    <ion-button slot="end" class="no-margin no-padding" (click)="onDeleteConfirm(event);">
+                      <ion-icon size="small" name="trash"></ion-icon>
+                    </ion-button>
+                </ion-header>
+                <p class=" no-margin italic"> {{ event.dataHorario }}  </p>
+                <p class="no-margin"><strong>Carga Horária:</strong> {{ event.cargaHoraria }}</p>
+              </ion-label>
+             
+              <ion-button fill="clear" [routerLink]="['/detail-event',event.id]">
+                <ion-icon size="small" name="arrow-forward"></ion-icon>
+              </ion-button>
+             
+            </ion-item>
+
+          </ion-item-sliding>
+
+        </ion-item-group>
+    </ion-list>
+</ion-content>
+
+
+<div *ngIf="!error">
+ <ion-text><p>Carregando...</p></ion-text>
+</div>
+
+<div *ngIf="error">
+  <ion-text><p>Erro ao consultar eventos, tente novamente mais tarde<p></ion-text>
+  <ion-button (click)="refresh();">tentar novamente</ion-button> 
+</div>
+<!--
+  <ion-item *ngFor = "let event of events">
+    {{ event.id}}, {{ event.title }}, {{ event.location }}
+  </ion-item>
+</ion-list> -->
