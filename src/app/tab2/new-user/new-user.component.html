@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Novo Usuário</ion-title>
+    <ion-back-button text="Voltar"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="formulario">
+    <ion-item>
+      <ion-label color="primary" position="stacked">Nome </ion-label>
+      <ion-input  type="text" formControlName="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">CPF</ion-label>
+      <ion-input  type="text"  formControlName="cpf"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Email</ion-label>
+      <ion-input  type="text"  formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Senha</ion-label>
+      <ion-input  type="password"  formControlName="senha"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Telefone</ion-label>
+      <ion-input  type="text"  formControlName="telefone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Departamento</ion-label>
+      <ion-input  type="text"  formControlName="departamento"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Data de Ingresso</ion-label>
+      <ion-datetime 
+        pickerFormat="DD/MMMM/YYYY" 
+        displayFormat="DD de MMMM de YYYY"
+        month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+        formControlName="data_ingresso"
+      >
+      </ion-datetime>
+    </ion-item>
+  </form>
+  <ion-button size="block"  type="submit" (click)="onSubmit();">CRIAR</ion-button>
+</ion-content>
+

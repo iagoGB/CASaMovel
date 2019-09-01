@@ -7,11 +7,5 @@ import { User } from '../models/models';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  private user: User = {
-    id: 1,
-    nome: "Professor X",
-    departamento:"STI",
-    data_entrada: null,
-    carga_horaria: 5
-  }
+  
 }

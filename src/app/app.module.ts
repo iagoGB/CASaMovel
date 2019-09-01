@@ -14,12 +14,16 @@ import { EventService } from './services/event/event.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth/auth.service';
 import { IonicStorageModule } from "@ionic/storage";
+import { NewUserComponent } from './tab2/new-user/new-user.component';
+import { UserService } from './services/user/user.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NewUserComponent
   ],
   entryComponents: [
+    NewUserComponent
   ],
   imports: [
     BrowserModule, 
@@ -35,6 +39,7 @@ import { IonicStorageModule } from "@ionic/storage";
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     EventService,
+    UserService,
     AuthService
   ],
   bootstrap: [AppComponent]

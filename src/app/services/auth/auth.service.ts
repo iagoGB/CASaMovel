@@ -49,20 +49,21 @@ export class AuthService {
       headers.append('content-type','application/json');
       console.log(headers);
     //Consultando os dados no servidor
-    //return this.http.post<AuthResponse>(this.url,user,{headers: headers });
+    return this.http.post<AuthResponse>(this.url,user,{headers: headers });
 
     //Para propósito de desenvolvimento apenas - SIMULANDO BACK END
     let localUser = null;
     let email = user.email;
     let senha = user.senha; 
 
-    if ( user.email ==='admin'&& user.senha ==='abcd1234'){
-      localUser = { token: TOKEN_VALUE,user: email, role:'ADMIN'}
-    } else if(user.email ==='user'&& user.senha ==='abcd1234') {
-      localUser = { token: TOKEN_VALUE+'1234', user:email, role:'USER'}
-    } else {
-      throw new Error('Usuário ou senha inválidos! \n Tente novamente');
-    }
+    // if ( user.email ==='admin'&& user.senha ==='abcd1234'){
+    //   localUser = { token: TOKEN_VALUE,user: email, role:'ADMIN'}
+    // } else if(user.email ==='user'&& user.senha ==='abcd1234') {
+    //   localUser = { token: TOKEN_VALUE+'1234', user:email, role:'USER'}
+    // } else {
+    //   throw new Error('Usuário ou senha inválidos! \n Tente novamente');
+    // }
+
     this.authState.next(localUser);
     return of(localUser);
 

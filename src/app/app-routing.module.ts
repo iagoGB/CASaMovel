@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth/authGuard/auth.guard';
+import { NewUserComponent } from './tab2/new-user/new-user.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   { 
     path: 'new-event', 
     loadChildren: './tab2/new-event/new-event.module#NewEventPageModule',
+  },
+  {
+    path:'new-user',
+    component: NewUserComponent
   },
   { 
     path: 'edit-event/:id',

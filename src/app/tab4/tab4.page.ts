@@ -7,13 +7,7 @@ import { User } from '../models/models';
   styleUrls: ['./tab4.page.scss'],
 })
 export class Tab4Page implements OnInit {
-  private user: User = {
-    id: 1,
-    nome: "Professor X",
-    departamento:"STI",
-    data_entrada: null,
-    carga_horaria: 5
-  }
+  
   constructor() { }
 
   ngOnInit( ) {

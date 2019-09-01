@@ -24,9 +24,17 @@ export interface AuthResponse{
 }
 
 export interface User {
-    "id": number,
-    "nome": string
+    "usuario_id": number,
+    "avatar": string,
+    "nome": string,
+    "cpf":string,
+    "telefone": string,
+    "email": string,
+    "senha": string,
     "departamento": string,
+    "eventos": Event[],
     'carga_horaria': number,
-    'data_entrada': Date
+    'data_ingresso': Date,
+    "criado_em":Date,
+    "atualizado_em": Date
 }
