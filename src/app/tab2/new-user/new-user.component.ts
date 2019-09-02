@@ -69,10 +69,10 @@ export class NewUserComponent implements OnInit {
       this.newUser = this.formulario.value;
       
       //Envie para o servidor
-      this.userService.createUser(this.newUser).subscribe(
+      this.userService.createUser(this.newUser).then(
         //Vai ter que esperar a resposta aqui para mostrar o present Toast;
-        resp => {this.alertService.presentToast('Novo evento criado!','dark')},
-        erro => {this.alertService.presentToast('Erro ao criar novo usuario','danger')}
+        resp => {this.alertService.presentToast(resp,'dark')},
+        erro => {this.alertService.presentToast(erro,'danger')}
       );
       console.log(this.formulario);
       //Informe ao usuário que o evento foi criado
