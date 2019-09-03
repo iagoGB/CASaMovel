@@ -49,7 +49,7 @@ export class AuthService {
       headers.append('content-type','application/json');
       console.log(headers);
     //Consultando os dados no servidor
-    return this.http.post<AuthResponse>(this.url,user,{headers: headers });
+    return this.http.post<AuthResponse>(this.url,user,{ headers: headers });
 
     //Para propósito de desenvolvimento apenas - SIMULANDO BACK END
     let localUser = null;

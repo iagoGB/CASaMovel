@@ -36,7 +36,7 @@ export class NewUserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    this.userService.getToken();
     //Construção do formulário reativo
       this.formulario = new FormGroup({
         nome: new FormControl(null, Validators.required),
@@ -47,6 +47,10 @@ export class NewUserComponent implements OnInit {
         senha: new FormControl(null, Validators.required),
         departamento: new FormControl(null, Validators.required)
       });
+  }
+
+  ngOnDestroy(){
+    this.userService.nullToken();
   }
 
   //Checkar arquivos
@@ -69,11 +73,18 @@ export class NewUserComponent implements OnInit {
       this.newUser = this.formulario.value;
       
       //Envie para o servidor
-      this.userService.createUser(this.newUser).then(
-        //Vai ter que esperar a resposta aqui para mostrar o present Toast;
-        resp => {this.alertService.presentToast(resp,'dark')},
-        erro => {this.alertService.presentToast(erro,'danger')}
+      this.userService.createUser(this.newUser).subscribe(
+        resp => {
+          this.alertService.presentToast(resp.toString(),'dark')
+          console.log('Deu certo o observable');
+        },
+        erro => {
+          this.alertService.presentToast(erro,'danger');
+          console.log('Não Deu certo o observable');
+        }
       );
+        
+      
       console.log(this.formulario);
       //Informe ao usuário que o evento foi criado
       
