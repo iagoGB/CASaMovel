@@ -30,14 +30,14 @@ export class Tab2Page {
     private userService: UserService,
     private alertService: AlertService
   ) {
-    this.userService.getId();
+    //this.userService.getId();
     this.userService.getToken();
   }
 
   ngOnInit(){
-    this.userService.loadUser().subscribe( 
-      resp =>{ this.profileUser = resp },
-      erro => { this.alertService.presentToast(erro.message, 'danger');}
-    )
+    // this.userService.loadUser().subscribe( 
+    //   resp =>{ this.profileUser = resp },
+    //   erro => { this.alertService.presentToast(erro.message, 'danger');}
+    // )
   }
 }

@@ -38,3 +38,8 @@ export interface User {
     "criado_em":Date,
     "atualizado_em": Date
 }
+
+export interface Categoria {
+    "categoria_id": number,
+    "nome": string
+}

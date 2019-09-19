@@ -10,6 +10,12 @@
     <ion-item>
       <input type="file" name="image" id="image" (change)="inputFileChange($event)">
     </ion-item>
+    <div *ngIf="categories">
+      <div *ngFor="let c of categories">
+        <p>c.categoria_id</p>  
+        <p>c.nome</p>
+      </div>
+    </div>
     <ion-item>
       <ion-label color="primary" position="stacked">Titulo do Evento </ion-label>
       <ion-input  type="text" formControlName="titulo"></ion-input>

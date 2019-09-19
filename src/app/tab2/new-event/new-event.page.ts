@@ -2,10 +2,11 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { EventService } from '../../services/event/event.service';
-import { Event } from './../../models/models';
+import { Event, Categoria } from './../../models/models';
 import { ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert/alert.service';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 @Component({
   selector: 'app-new-event',
@@ -16,6 +17,8 @@ export class NewEventPage implements OnInit {
 
   formulario: FormGroup;
   private t: string = '';
+
+  private categories: Categoria[];
 
   private newEvent: Event = {
     evento_id: null,
@@ -32,10 +35,17 @@ export class NewEventPage implements OnInit {
   constructor (
     private http : EventService, 
     private alertService : AlertService,
+    private categoryService: CategoryService,
     private location : Location
   ) { }
 
   ngOnInit() {
+
+    //Buscar a listagem de categoria
+    this.categoryService.getAll().subscribe(
+      (array)=> { this.categories = array; }, 
+      (erro) =>{ this.alertService.presentToast(erro,'danger') }
+    )
     
     //Construção do formulário reativo
       this.formulario = new FormGroup({
