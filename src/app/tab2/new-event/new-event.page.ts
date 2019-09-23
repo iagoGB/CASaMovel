@@ -7,6 +7,7 @@ import { ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { CategoryService } from 'src/app/services/category/category.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-new-event',
@@ -24,7 +25,7 @@ export class NewEventPage implements OnInit {
     evento_id: null,
     imagem: "",
     titulo: "",
-    localizacao: "",
+    local: "",
     palestrante: [""],
     data_horario: null,
     carga_horaria: 0,
@@ -35,12 +36,14 @@ export class NewEventPage implements OnInit {
   constructor (
     private http : EventService, 
     private alertService : AlertService,
+    private eventService: EventService,
     private categoryService: CategoryService,
     private location : Location
   ) { }
 
   ngOnInit() {
-
+    //Pegue o token para quando for formar o header
+    this.eventService.getToken();
     //Buscar a listagem de categoria
     this.categoryService.getAll().subscribe(
       (array)=> { this.categories = array; }, 
@@ -49,12 +52,11 @@ export class NewEventPage implements OnInit {
     
     //Construção do formulário reativo
       this.formulario = new FormGroup({
-        imagem: new FormControl(null, Validators.required),
         titulo: new FormControl(null, Validators.required),
-        localizacao: new FormControl(null, Validators.required),
+        local: new FormControl(null, Validators.required),
         palestrante:new FormControl(null, Validators.required),
-        dataHorario: new FormControl(null, Validators.required),
-        cargaHoraria: new FormControl(null, Validators.required)
+        data_horario: new FormControl(null, Validators.required),
+        carga_horaria: new FormControl(null, Validators.required)
       });
 
     /*
@@ -68,6 +70,11 @@ export class NewEventPage implements OnInit {
         updateAt:[null]
       });
     */
+  }
+
+
+  ngOnDestroy(){
+    this.eventService.nullToken();
   }
 
   //Checkar arquivos
@@ -93,12 +100,18 @@ export class NewEventPage implements OnInit {
       //Envie para o servidor
       this.http.createEvent(this.newEvent).subscribe(
         //Vai ter que esperar a resposta aqui para mostrar o present Toast;
+        sucess =>{ 
+          this.alertService.presentToast('Novo evento criado!','dark');
+          this.location.back();
+        },
+        error =>{ this.alertService.presentToast(error,'danger'); }
+
       );
       console.log(this.formulario);
       //Informe ao usuário que o evento foi criado
-      this.alertService.presentToast('Novo evento criado!','dark');
+      
       //Retorne pra tela de eventos
-      this.location.back();
+      
       /* Falta incluir  travativa de erros */
     }
 

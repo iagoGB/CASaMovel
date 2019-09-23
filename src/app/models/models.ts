@@ -4,7 +4,7 @@ export interface Event {
     "evento_id": number,
     "imagem": string,
     "titulo": string,
-    "localizacao": string,
+    "local": string,
     "palestrante": string[],
     "carga_horaria":number;
     "data_horario": Date,

@@ -10,13 +10,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private h = new HttpHeaders();
   private key_value: string;
   private url: string = "http://localhost:9999/usuario";
 
   constructor( 
-    private httpClient: HttpClient, 
-    private authService: AuthService,
+    private httpClient: HttpClient,
     private storage: Storage,
     private alertService: AlertService
   ) { }
@@ -28,7 +26,6 @@ export class UserService {
 
   nullToken (){
     this.key_value = null;
-    this.h = null;
   }
 
   createUser(newUser: User){

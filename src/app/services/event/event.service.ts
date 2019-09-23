@@ -1,6 +1,7 @@
 import { Event } from '../../models/models';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Storage } from "@ionic/storage";
 
 import { Observable, Subject } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
@@ -13,26 +14,43 @@ import { take, tap } from 'rxjs/operators';
 export class EventService {
 
   private url: string = "http://localhost:9999";
-  private events: string = "/events";
+  private events: string = "/evento";
+  private key_value: string;
   private _refreshNeeded: Subject<void> = new Subject<void>();
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private storage: Storage
+  ) {
     
   };
 
+  async getToken() {
+    this.key_value = await this.storage.get('Authorization');
+    console.log(" get key value: "+ this.key_value);
+  }
+
+  nullToken (){
+    this.key_value = null;
+  }
+
+  refreshNeeded(): Subject<any> {
+    return this._refreshNeeded;
+  }
+
   loadByID(event_id):any {
-    return this.http.get(this.url+this.events+"/"+event_id).pipe(take(1));
+    return this.http.get(this.url+this.events+"/"+event_id, { headers: new HttpHeaders().set('Authorization',this.key_value) }).pipe(take(1));
   }
 
   //Retorna a variavel responsável por fazer o refresh
   getEvents():Observable<Event[]>{
-    return this.http.get<Event[]>(this.url+this.events);
+    return this.http.get<Event[]>(this.url+this.events, { headers: new HttpHeaders().set('Authorization',this.key_value) });
   }
 
   // Requisição para o servidor criar novo registro
   createEvent(newEvent: Event){
     console.log(newEvent);
-    return this.http.post(this.url+this.events,newEvent)
+    return this.http.post(this.url+this.events,newEvent, { headers: new HttpHeaders().set('Authorization',this.key_value) })
     .pipe(
       take(1),
       tap(() => {
@@ -41,14 +59,10 @@ export class EventService {
     );
     //pipe take 1 Faz a requisição apenas uma única vez e encerra o observable automaticamente
   }
-
-  refreshNeeded(): Subject<any> {
-    return this._refreshNeeded;
-  }
   
   // Requisição para o servidor atualizar registro
   updateEvent(toUpdateEvent: Event) {
-    return this.http.put(this.url+this.events+'/'+toUpdateEvent.evento_id,toUpdateEvent)
+    return this.http.put(this.url+this.events+'/'+toUpdateEvent.evento_id,toUpdateEvent,  { headers: new HttpHeaders().set('Authorization',this.key_value) })
     .pipe(
       take(1),
       tap(() => {
@@ -60,7 +74,7 @@ export class EventService {
 
   // Requisição para o servidor deletar registro
   removeEvent(toDeleteEvent: Event){
-    return this.http.delete(this.url+this.events+'/'+toDeleteEvent.evento_id)
+    return this.http.delete(this.url+this.events+'/'+toDeleteEvent.evento_id, { headers: new HttpHeaders().set('Authorization',this.key_value) })
     .pipe(
       take(1),
       tap (

@@ -33,17 +33,17 @@
         month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
         day-names="Domingo, Segunda, Terça, Quarta, Quinta, Sexta, Sábado" 
         minuteValues="00,15,30,45"
-        formControlName="dataHorario"
+        formControlName="data_horario"
       >
       </ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label color="primary" position="stacked">Local</ion-label>
-      <ion-input type="text" formControlName="localizacao"></ion-input>
+      <ion-input type="text" formControlName="local"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" position="stacked">Carga Horária</ion-label>
-      <ion-input   type="number" formControlName="cargaHoraria"></ion-input>
+      <ion-input   type="number" formControlName="carga_horaria"></ion-input>
     </ion-item>
   </form>
   <ion-button size="block"  type="submit" (click)="onSubmit();">CRIAR</ion-button>
