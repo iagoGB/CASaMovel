@@ -17,7 +17,7 @@ export class DetailEventPage implements OnInit {
     imagem: null,
     titulo: '',
     data_horario: null,
-    localizacao: '',
+    local: '',
     palestrante: [],
     carga_horaria: 0,
     criado_em: null,

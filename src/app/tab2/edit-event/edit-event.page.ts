@@ -19,7 +19,7 @@ export class EditEventPage implements OnInit {
     evento_id: null,
     imagem: null,
     titulo: "",
-    localizacao: "",
+    local: "",
     palestrante: [""],
     data_horario: null, 
     carga_horaria:0, 
@@ -52,7 +52,7 @@ export class EditEventPage implements OnInit {
   updateInput(data){
     this.newEvent.evento_id = data.id;
     this.newEvent.titulo = data.title;
-    this.newEvent.localizacao = data.localizacao;
+    this.newEvent.local = data.local;
     this.newEvent.palestrante = data.palestrante;
     this.newEvent.carga_horaria = data.carga_horaria;
     this.newEvent.data_horario = data.data_horario; 
