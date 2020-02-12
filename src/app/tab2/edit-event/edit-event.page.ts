@@ -20,6 +20,7 @@ export class EditEventPage implements OnInit {
     imagem: null,
     titulo: "",
     local: "",
+    categoria: null,
     palestrante: [""],
     data_horario: null, 
     carga_horaria:0, 

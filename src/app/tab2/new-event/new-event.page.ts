@@ -26,6 +26,7 @@ export class NewEventPage implements OnInit {
     imagem: "",
     titulo: "",
     local: "",
+    categoria: null,
     palestrante: [""],
     data_horario: null,
     carga_horaria: 0,
@@ -46,12 +47,13 @@ export class NewEventPage implements OnInit {
     this.eventService.getToken();
     //Buscar a listagem de categoria
     this.categoryService.getAll().subscribe(
-      (array)=> { this.categories = array; }, 
+      (array)=> {   this.categories = array; this.categories.forEach ( c => console.log(c.id) )}, 
       (erro) =>{ this.alertService.presentToast(erro,'danger') }
     )
     
     //Construção do formulário reativo
       this.formulario = new FormGroup({
+        categoria: new FormControl(null, Validators.required),
         titulo: new FormControl(null, Validators.required),
         local: new FormControl(null, Validators.required),
         palestrante:new FormControl(null, Validators.required),
