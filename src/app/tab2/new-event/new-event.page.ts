@@ -77,7 +77,7 @@ export class NewEventPage implements OnInit {
         titulo: [null],
         local: [null],
         categoria: [null],
-        palestrante: this.formBuilder.array([
+        palestrantes: this.formBuilder.array([
           null
         ]),
         data_horario: [null],
@@ -87,7 +87,7 @@ export class NewEventPage implements OnInit {
   }
 
   addPalestrante(){
-    let palestrante = this.formulario.get('palestrante') as FormArray;
+    let palestrante = this.formulario.get('palestrantes') as FormArray;
     palestrante.push(
       new FormControl(null)
     )

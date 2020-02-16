@@ -27,12 +27,12 @@
       <ion-input  type="text" formControlName="titulo"></ion-input>
     </ion-item>
     <ion-button color="primary" fill="clear" slot="end" (click)="addPalestrante();"><ion-icon size="large" name="add"></ion-icon></ion-button>
-      <div  formArrayName="palestrante" *ngFor="let p of formulario.get('palestrante').controls; let i = index">
+      <div  formArrayName="palestrantes" *ngFor="let p of formulario.get('palestrantes').controls; let i = index">
         <ion-item>
           <!-- <ion-label color="primary" position="stacked">Palestrante(s)</ion-label>
           <ion-input  type="text"  [formControlName]="i"></ion-input> -->
           <ion-select style="width: 100%;" placeholder="Selecione o palestrante" interface="popover" [formControlName]="i">
-          <ion-select-option *ngFor="let s of speakers" [value]="s.id">{{ s.nome }}</ion-select-option>
+          <ion-select-option *ngFor="let s of speakers" [value]="s.nome">{{ s.nome }}</ion-select-option>
         </ion-select>
         </ion-item>
       </div>
