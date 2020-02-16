@@ -2,12 +2,13 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { EventService } from '../../services/event/event.service';
-import { Event, Categoria } from './../../models/models';
+import { Event, Categoria, Palestrante } from './../../models/models';
 import { ToastController } from '@ionic/angular';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { SpeakerService } from 'src/app/services/speaker/speaker.service';
 
 @Component({
   selector: 'app-new-event',
@@ -17,9 +18,9 @@ import { UserService } from 'src/app/services/user/user.service';
 export class NewEventPage implements OnInit {
 
   formulario: FormGroup;
-  private t: string = '';
 
   private categories: Categoria[];
+  private speakers: Palestrante[];
 
   private newEvent: Event = {
     evento_id: null,
@@ -35,10 +36,12 @@ export class NewEventPage implements OnInit {
   }
 
   constructor (
+    private formBuilder: FormBuilder,
     private http : EventService, 
     private alertService : AlertService,
     private eventService: EventService,
     private categoryService: CategoryService,
+    private speakerService: SpeakerService,
     private location : Location
   ) { }
 
@@ -51,27 +54,44 @@ export class NewEventPage implements OnInit {
       (erro) =>{ this.alertService.presentToast(erro,'danger') }
     )
     
+    this.speakerService.getAll().subscribe(
+      (array) =>  { this.speakers = array; this.speakers.forEach ( c => console.log(c.nome)) },
+      (erro) => this.alertService.presentToast(erro, 'danger')
+    )
+    
     //Construção do formulário reativo
-      this.formulario = new FormGroup({
-        categoria: new FormControl(null, Validators.required),
-        titulo: new FormControl(null, Validators.required),
-        local: new FormControl(null, Validators.required),
-        palestrante:new FormControl(null, Validators.required),
-        data_horario: new FormControl(null, Validators.required),
-        carga_horaria: new FormControl(null, Validators.required)
-      });
+      // this.formulario = new FormGroup({
+      //   categoria: new FormControl(null, Validators.required),
+      //   titulo: new FormControl(null, Validators.required),
+      //   local: new FormControl(null, Validators.required),
+      //   palestrante: new FormArray({
+      //     FormControl(null)
+      //   }),
+      //   data_horario: new FormControl(null, Validators.required),
+      //   carga_horaria: new FormControl(null, Validators.required)
+      // });
 
-    /*
-      this.formulario = this.formBuilder.group ({
-        title: [null],
-        location: [null],
-        speakers:[ [null] ],
-        date: [null],
-        hour: [null],
-        creatAt: [null],
-        updateAt:[null]
+    
+      this.formulario = this.formBuilder.group({
+        evento_id: [null],
+        titulo: [null],
+        local: [null],
+        categoria: [null],
+        palestrante: this.formBuilder.array([
+          null
+        ]),
+        data_horario: [null],
+        carga_horaria: [null],
       });
-    */
+    
+  }
+
+  addPalestrante(){
+    let palestrante = this.formulario.get('palestrante') as FormArray;
+    palestrante.push(
+      new FormControl(null)
+    )
+
   }
 
 

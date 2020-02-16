@@ -44,3 +44,9 @@ export interface Categoria {
     "id": number,
     "nome": string
 }
+
+export interface Palestrante {
+    "id": number,
+    "nome": string,
+    "desc": string
+}

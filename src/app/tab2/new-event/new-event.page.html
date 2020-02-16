@@ -18,7 +18,7 @@
     </div> -->
     <ion-item>
       <ion-label color="primary" position="stacked">Categoria</ion-label>
-      <ion-select placeholder="Selecione um" interface="popover" formControlName="categoria">
+      <ion-select placeholder="Selecione uma" interface="popover" formControlName="categoria">
         <ion-select-option *ngFor="let c of categories" [value]="c.id">{{ c.nome }}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -26,11 +26,17 @@
       <ion-label color="primary" position="stacked">Titulo do Evento </ion-label>
       <ion-input  type="text" formControlName="titulo"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label color="primary" position="stacked">Palestrante(s)</ion-label>
-      <ion-button color="primary" fill="clear" slot="end"><ion-icon size="large" name="add"></ion-icon></ion-button>
-      <ion-input  type="text"  formControlName="palestrante"></ion-input>
-    </ion-item>
+    <ion-button color="primary" fill="clear" slot="end" (click)="addPalestrante();"><ion-icon size="large" name="add"></ion-icon></ion-button>
+      <div  formArrayName="palestrante" *ngFor="let p of formulario.get('palestrante').controls; let i = index">
+        <ion-item>
+          <!-- <ion-label color="primary" position="stacked">Palestrante(s)</ion-label>
+          <ion-input  type="text"  [formControlName]="i"></ion-input> -->
+          <ion-select style="width: 100%;" placeholder="Selecione o palestrante" interface="popover" [formControlName]="i">
+          <ion-select-option *ngFor="let s of speakers" [value]="s.id">{{ s.nome }}</ion-select-option>
+        </ion-select>
+        </ion-item>
+      </div>
+    
     <ion-item>
       <ion-label color="primary" position="stacked">Data do Evento</ion-label>
       <ion-datetime 
