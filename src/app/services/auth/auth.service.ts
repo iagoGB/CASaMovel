@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 const TOKEN_KEY: string = 'Authorization';
 const ROLE_KEY: string = 'Role';
@@ -21,7 +22,6 @@ export class AuthService {
   //Variável para propósitos de desenvolvimento
   private _user: Observable<any>;
   public authState = new BehaviorSubject(false);
-  private url: string = "http://localhost:9999/login";
   
   constructor (
     private http: HttpClient,
@@ -49,7 +49,7 @@ export class AuthService {
       headers.append('content-type','application/json');
       console.log(headers);
     //Consultando os dados no servidor
-    return this.http.post<AuthResponse>(this.url,user,{ headers: headers });
+    return this.http.post<AuthResponse>(`${environment.API}/login`,user,{ headers: headers });
 
     //Para propósito de desenvolvimento apenas - SIMULANDO BACK END
     let localUser = null;

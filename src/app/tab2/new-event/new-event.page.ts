@@ -122,11 +122,20 @@ export class NewEventPage implements OnInit {
       //Envie para o servidor
       this.http.createEvent(this.newEvent).subscribe(
         //Vai ter que esperar a resposta aqui para mostrar o present Toast;
-        sucess =>{ 
-          this.alertService.presentToast('Novo evento criado!','dark');
-          this.location.back();
+        resp =>{
+          console.log("Resp: " + resp);
+          if (resp.status == 201) {
+            this.alertService.presentToast('Novo evento criado!','dark');
+            this.location.back();
+          } else {
+            console.log("REsp no else: "+ resp)
+            this.alertService.presentToast(resp.statusText,'danger');
+          } 
         },
-        error =>{ this.alertService.presentToast(error,'danger'); }
+        erro =>{ 
+          console.log("Deu erro ae"+ erro);
+          this.alertService.presentToast(erro,'danger'); 
+        }
 
       );
       console.log(this.formulario);

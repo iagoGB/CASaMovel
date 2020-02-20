@@ -5,13 +5,14 @@ import { AuthService } from '../auth/auth.service';
 import { Storage } from '@ionic/storage';
 import { AlertService } from '../alert/alert.service';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private key_value: string;
-  private url: string = "http://localhost:9999/usuario";
+  private url: string = `${environment.API}/usuario`;
 
   constructor( 
     private httpClient: HttpClient,
