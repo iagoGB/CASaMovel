@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ToastController } from '@ionic/angular';
+import { text } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,12 @@ export class AlertService {
       const toast = await this.toastController.create({
         message: msg,
         position: 'middle',
-        color: color,
-        showCloseButton: true,
-        closeButtonText:'x',
+        buttons: [ 
+          {
+            text: 'Fechar',
+            role: 'cancel'
+          }
+        ],
         duration: 3000
       });
       toast.present();

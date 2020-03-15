@@ -73,8 +73,12 @@ export class EditEventPage implements OnInit {
       message: 'Evento atualizado!',
       position: 'middle',
       color:"dark",
-      showCloseButton: true,
-      closeButtonText:'x',
+      buttons: [ 
+        {
+          text: 'Fechar',
+          role: 'cancel'
+        }
+      ],
       duration: 2000
     });
     toast.present();
