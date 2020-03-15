@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-
 import { ToastController } from '@ionic/angular';
-import { text } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root'
