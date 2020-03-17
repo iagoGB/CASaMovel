@@ -19,10 +19,10 @@ export class NewEventPage implements OnInit {
 
   formulario: FormGroup;
 
-  private categories: Categoria[];
-  private speakers: Palestrante[];
+  public categories: Categoria[];
+  public speakers: Palestrante[];
 
-  private newEvent: Event = {
+  public newEvent: Event = {
     evento_id: null,
     imagem: "",
     titulo: "",
@@ -36,7 +36,7 @@ export class NewEventPage implements OnInit {
   }
 
   constructor (
-    private formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,
     private http : EventService, 
     private alertService : AlertService,
     private eventService: EventService,
@@ -148,7 +148,9 @@ export class NewEventPage implements OnInit {
 
   }
 
-
+  get formData (){
+    return <FormArray>this.formulario.get('palestrantes');
+  }
  
 
 }

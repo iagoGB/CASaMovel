@@ -17,7 +17,7 @@ import { AlertService } from '../services/alert/alert.service';
 })
 export class Tab3Page {
 
-  private events: Event[];
+  public events: Event[];
   public error: boolean;
 
   constructor ( 

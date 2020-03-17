@@ -27,7 +27,7 @@
       <ion-input  type="text" formControlName="titulo"></ion-input>
     </ion-item>
     <ion-button color="primary" fill="clear" slot="end" (click)="addPalestrante();"><ion-icon size="large" name="add"></ion-icon></ion-button>
-      <div  formArrayName="palestrantes" *ngFor="let p of formulario.get('palestrantes').controls; let i = index">
+      <div  formArrayName="palestrantes" *ngFor="let p of formData.controls; let i = index">
         <ion-item>
           <!-- <ion-label color="primary" position="stacked">Palestrante(s)</ion-label>
           <ion-input  type="text"  [formControlName]="i"></ion-input> -->

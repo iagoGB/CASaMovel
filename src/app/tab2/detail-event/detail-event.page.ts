@@ -12,7 +12,7 @@ import { Event } from 'src/app/models/models';
 })
 export class DetailEventPage implements OnInit {
 
-  private event: Event = {
+  public event: Event = {
     evento_id : null,
     imagem: null,
     titulo: '',

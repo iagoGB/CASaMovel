@@ -15,7 +15,7 @@ import { Location } from '@angular/common';
 
 export class EditEventPage implements OnInit {
 
-  private newEvent: Event = {
+  public newEvent: Event = {
     evento_id: null,
     imagem: null,
     titulo: "",

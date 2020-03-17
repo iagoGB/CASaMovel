@@ -11,11 +11,11 @@ const routes: Routes = [
   },
   { 
     path: 'login', 
-    loadChildren: './login/login.module#LoginPageModule' 
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule) 
   },
   { 
     path: 'new-event', 
-    loadChildren: './tab2/new-event/new-event.module#NewEventPageModule',
+    loadChildren: () => import('./tab2/new-event/new-event.module').then(m => m.NewEventPageModule),
   },
   {
     path:'new-user',
@@ -23,11 +23,11 @@ const routes: Routes = [
   },
   { 
     path: 'edit-event/:id',
-    loadChildren: './tab2/edit-event/edit-event.module#EditEventPageModule' 
+    loadChildren: () => import('./tab2/edit-event/edit-event.module').then(m => m.EditEventPageModule) 
   },
   { 
     path: 'detail-event/:id',
-    loadChildren: './tab2/detail-event/detail-event.module#DetailEventPageModule' 
+    loadChildren: () => import('./tab2/detail-event/detail-event.module').then(m => m.DetailEventPageModule) 
   },
   { 
     path: 'tabs', 
@@ -35,7 +35,7 @@ const routes: Routes = [
     data: {
       role: 'USER'
     },
-    loadChildren: './tabs/tabs.module#TabsPageModule'
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: 'admin-dashboard', 
@@ -43,7 +43,7 @@ const routes: Routes = [
     data: {
       role: 'ADMIN'
     },
-    loadChildren: './admin-dashboard/admin-dashboard.module#AdminDashboardPageModule'
+    loadChildren: () => import('./admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardPageModule)
   }
 ];
 @NgModule({

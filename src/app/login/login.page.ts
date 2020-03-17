@@ -14,15 +14,15 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  private authUser: AuthUser = {
+  public authUser: AuthUser = {
     email: "",
     senha: ""
   };
 
   constructor(
-    private authService: AuthService,
-    private alertService: AlertService,
-    private router: Router
+    public authService: AuthService,
+    public alertService: AlertService,
+    public router: Router
   ) { }
 
   ngOnInit() {

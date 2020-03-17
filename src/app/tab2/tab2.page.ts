@@ -9,8 +9,8 @@ import { AlertService } from '../services/alert/alert.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-
-  private profileUser: User = {
+  public user: any;
+  public profileUser: User = {
     usuario_id: null,
     avatar: null,
     nome: null,

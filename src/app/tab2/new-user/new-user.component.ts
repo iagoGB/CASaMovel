@@ -12,9 +12,9 @@ import { UserService } from 'src/app/services/user/user.service';
 export class NewUserComponent implements OnInit {
 
   formulario: FormGroup;
-  private t: string = '';
+  public t: string = '';
 
-  private newUser: User = {
+  public newUser: User = {
     usuario_id:null,
     avatar: null,
     nome: null,
