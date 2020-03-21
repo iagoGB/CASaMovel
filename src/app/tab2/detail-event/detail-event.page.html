@@ -9,12 +9,12 @@
   <ion-img class="ion-padding" src="http://www.casa.ufc.br/wp-content/uploads/2019/05/14-05-2019-laboratorio-de-praticas-docentes.corrigido.jpg"></ion-img> <!-- src="http://www.fjmangabeira.org.br/wp-content/uploads/2017/05/Curso.jpg"-->
   <ion-list class="ion-padding" *ngIf="event">
     <ion-header>
-      {{event.id}}: {{event.title}}
+      {{ event.id }}: {{ event.titulo }}
     </ion-header>
-    <p>{{event.location}}</p>
-    <p>{{event.speakers}}</p>
-    <p>{{event.date}}</p>
-    <p>{{event.hour}}</p>
+    <p>{{ event.localizacao }}</p>
+    <p *ngFor="let palestrante of event.palestrante">{{ palestrante }}</p>
+    <p>{{ event.data_horario }}</p>
+    <p>{{ event.carga_horaria }}</p>
     <ion-button size="block">PARTICIPAR</ion-button>
   </ion-list>
  

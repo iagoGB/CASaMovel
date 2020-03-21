@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { EventService } from 'src/app/services/event/event.service';
 import { Event } from 'src/app/models/models';
 
@@ -13,7 +12,7 @@ import { Event } from 'src/app/models/models';
 export class DetailEventPage implements OnInit {
 
   public event: Event = {
-    evento_id : null,
+    id : null,
     imagem: null,
     titulo: '',
     data_horario: null,
@@ -29,7 +28,6 @@ export class DetailEventPage implements OnInit {
   constructor (
     private http: EventService,
     private route: ActivatedRoute,
-    private location: Location
   ) { }
 
   ngOnInit() {
@@ -40,7 +38,7 @@ export class DetailEventPage implements OnInit {
         const event$ = this.http.loadByID(id);
         event$.subscribe (
           data => {
-            this.event = data;
+            this.event = data.body;
           }
         )
       }

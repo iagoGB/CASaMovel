@@ -1,7 +1,7 @@
 import { stringify } from '@angular/compiler/src/util';
 
 export interface Event {
-    "evento_id": number,
+    "id": number,
     "imagem": string,
     "categoria": number,
     "titulo": string,

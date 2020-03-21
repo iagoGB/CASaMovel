@@ -1,14 +1,12 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { EventService } from '../../services/event/event.service';
 import { Event, Categoria, Palestrante } from './../../models/models';
-import { ToastController } from '@ionic/angular';
-import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { CategoryService } from 'src/app/services/category/category.service';
-import { UserService } from 'src/app/services/user/user.service';
 import { SpeakerService } from 'src/app/services/speaker/speaker.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-event',
@@ -23,7 +21,7 @@ export class NewEventPage implements OnInit {
   public speakers: Palestrante[];
 
   public newEvent: Event = {
-    evento_id: null,
+    id: null,
     imagem: "",
     titulo: "",
     local: "",
@@ -42,7 +40,7 @@ export class NewEventPage implements OnInit {
     private eventService: EventService,
     private categoryService: CategoryService,
     private speakerService: SpeakerService,
-    private location : Location
+    private router : Router
   ) { }
 
   ngOnInit() {
@@ -122,15 +120,19 @@ export class NewEventPage implements OnInit {
       //Envie para o servidor
       this.http.createEvent(this.newEvent).subscribe(
         //Vai ter que esperar a resposta aqui para mostrar o present Toast;
-        resp =>{
-          console.log("Resp: " + resp);
-          if (resp.status == 201) {
+        resp => {
+          console.log("Status: "+resp.status + " "+ resp.ok);
+          console.log("id"+resp.body.id);
+          console.log("Response Body: " + JSON.stringify(resp));
+
+          if (resp.ok) {
             this.alertService.presentToast('Novo evento criado!','dark');
-            this.location.back();
+            this.router.navigate([`detail-event/${resp.body.id}`]);
           } else {
-            console.log("REsp no else: "+ resp)
-            this.alertService.presentToast(resp.statusText,'danger');
+            console.log("Ocorreu um erro cai no if");
+            this.alertService.presentToast(JSON.stringify( resp.statusText ),'danger');
           } 
+          
         },
         erro =>{ 
           console.log("Deu erro ae"+ erro);

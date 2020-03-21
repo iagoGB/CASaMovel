@@ -16,7 +16,7 @@ import { Location } from '@angular/common';
 export class EditEventPage implements OnInit {
 
   public newEvent: Event = {
-    evento_id: null,
+    id: null,
     imagem: null,
     titulo: "",
     local: "",
@@ -51,7 +51,7 @@ export class EditEventPage implements OnInit {
   }
 
   updateInput(data){
-    this.newEvent.evento_id = data.id;
+    this.newEvent.id = data.id;
     this.newEvent.titulo = data.title;
     this.newEvent.local = data.local;
     this.newEvent.palestrante = data.palestrante;

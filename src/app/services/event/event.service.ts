@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 
 export class EventService {
 
-  private url: string = `${environment.API}/curso`;
+  private url: string = `${environment.API}/evento`;
   private key_value: string;
   private _refreshNeeded: Subject<void> = new Subject<void>();
 
@@ -38,8 +38,8 @@ export class EventService {
     return this._refreshNeeded;
   }
 
-  loadByID(event_id):any {
-    return this.http.get(`${this.url}/${event_id}`, { headers: new HttpHeaders().set('Authorization',this.key_value) }).pipe(take(1));
+  loadByID(event_id):Observable<HttpResponse<Event>> {
+    return this.http.get<Event>(`${this.url}/${event_id}`, { headers: new HttpHeaders().set('Authorization',this.key_value), observe: 'response' }).pipe(take(1));
   }
 
   //Retorna a variavel responsável por fazer o refresh
@@ -48,9 +48,13 @@ export class EventService {
   }
 
   // Requisição para o servidor criar novo registro
-  createEvent(newEvent: Event): Observable<HttpHeaderResponse>{
+  createEvent(newEvent: Event): Observable<HttpResponse<Event>>{
     console.log(newEvent);
-    return this.http.post<HttpHeaderResponse>(`${this.url}`,newEvent, { headers: new HttpHeaders().set('Authorization',this.key_value) });
+    return this.http.post<Event>(`${this.url}`, newEvent, 
+    { 
+      headers: new HttpHeaders().set('Authorization',this.key_value) , 
+      observe: 'response' 
+    });
     // .pipe(
     //   take(1),
     //   tap(() => {
@@ -62,7 +66,7 @@ export class EventService {
   
   // Requisição para o servidor atualizar registro
   updateEvent(toUpdateEvent: Event) {
-    return this.http.put(`${this.url}/${toUpdateEvent.evento_id}`,toUpdateEvent,  { headers: new HttpHeaders().set('Authorization',this.key_value) })
+    return this.http.put(`${this.url}/${toUpdateEvent.id}`,toUpdateEvent,  { headers: new HttpHeaders().set('Authorization',this.key_value) })
     .pipe(
       take(1),
       tap(() => {
@@ -74,7 +78,7 @@ export class EventService {
 
   // Requisição para o servidor deletar registro
   removeEvent(toDeleteEvent: Event){
-    return this.http.delete(`${this.url}/${toDeleteEvent.evento_id}`, { headers: new HttpHeaders().set('Authorization',this.key_value) })
+    return this.http.delete(`${this.url}/${toDeleteEvent.id}`, { headers: new HttpHeaders().set('Authorization',this.key_value) })
     .pipe(
       take(1),
       tap (
