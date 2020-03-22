@@ -1,14 +1,10 @@
-
-
-
 import { Component } from '@angular/core';
 
 import { EventService } from '../services/event/event.service';
 import { Event } from './../models/models';
-import { Location } from '@angular/common';
 import { AlertController } from '@ionic/angular';
-import { HttpErrorResponse } from '@angular/common/http';
 import { AlertService } from '../services/alert/alert.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tab3',
@@ -19,13 +15,13 @@ export class Tab3Page {
 
   public events: Event[];
   public error: boolean;
+  private subscribe: Subscription;
 
   constructor ( 
     //Injeção das dependências 
     private http: EventService, 
     private alertController: AlertController,
-    private alertService: AlertService,
-    private  location: Location 
+    private alertService: AlertService, 
   ) { };
 
   ngOnInit(){
@@ -36,6 +32,7 @@ export class Tab3Page {
   }
 
   ngOnDestroy(){
+    this.subscribe.unsubscribe();
   }
 
   //Refresh
@@ -48,14 +45,21 @@ export class Tab3Page {
   }
   //Função que Solicita a listagem de eventos
   private getEvents(): void {
-    this.http.getEvents()
-    .subscribe(
-      data => this.events = data,
-      (erro: HttpErrorResponse) => {
-        this.error = true;
-        this.alertService.presentToast(erro.message, 'danger');
-      });
-  }
+    this.http.getEvents().then ( (value) =>
+    {
+      
+      this.subscribe = value.subscribe(
+        (data) => 
+        { 
+          this.events = data.body; 
+        }, 
+        (erro) => 
+        {
+          this.error = true;
+          this.alertService.presentToast(erro.message, 'danger');
+        });
+    }) 
+   }
 
   //Evento assincrono para exibir modal ao clicar em deletar 
   async onDeleteConfirm ( event: Event ) {

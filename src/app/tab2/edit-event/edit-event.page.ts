@@ -17,6 +17,7 @@ export class EditEventPage implements OnInit {
 
   public newEvent: Event = {
     id: null,
+    foto: null,
     imagem: null,
     titulo: "",
     local: "",

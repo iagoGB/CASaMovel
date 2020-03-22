@@ -25,6 +25,7 @@ export class NewEventPage implements OnInit {
     imagem: "",
     titulo: "",
     local: "",
+    foto: '',
     categoria: null,
     palestrante: [""],
     data_horario: null,

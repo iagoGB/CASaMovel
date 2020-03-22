@@ -3,6 +3,7 @@ import { stringify } from '@angular/compiler/src/util';
 export interface Event {
     "id": number,
     "imagem": string,
+    "foto": string,
     "categoria": number,
     "titulo": string,
     "local": string,

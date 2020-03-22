@@ -17,8 +17,8 @@
                       <ion-icon size="small" name="trash"></ion-icon>
                     </ion-button>
                 </ion-header>
-                <p class=" no-margin italic"> {{ event.dataHorario }}  </p>
-                <p class="no-margin"><strong>Carga Horária:</strong> {{ event.cargaHoraria }}</p>
+                <p class=" no-margin italic"> {{ event.data_horario }}  </p>
+                <p class="no-margin"><strong>Carga Horária:</strong> {{ event.carga_horaria }}</p>
               </ion-label>
              
               <ion-button fill="clear" [routerLink]="['/detail-event',event.id]">
@@ -34,7 +34,7 @@
 </ion-content>
 
 
-<div *ngIf="!error">
+<div *ngIf="!error && !events">
  <ion-text><p>Carregando...</p></ion-text>
 </div>
 

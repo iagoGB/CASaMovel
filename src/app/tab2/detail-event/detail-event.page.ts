@@ -14,6 +14,7 @@ export class DetailEventPage implements OnInit {
   public event: Event = {
     id : null,
     imagem: null,
+    foto: '',
     titulo: '',
     data_horario: null,
     local: '',

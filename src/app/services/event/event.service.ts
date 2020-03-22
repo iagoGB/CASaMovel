@@ -43,8 +43,11 @@ export class EventService {
   }
 
   //Retorna a variavel responsável por fazer o refresh
-  getEvents():Observable<Event[]>{
-    return this.http.get<Event[]>(`${this.url}`, { headers: new HttpHeaders().set('Authorization',this.key_value) });
+  getEvents():Promise<Observable<HttpResponse<Event[]>>>{
+    return this.storage.get('Authorization').then ( (value)=> { return this.http.get<Event[]>(`${this.url}`, { headers: new HttpHeaders().set('Authorization',value), observe:'response' });});
+
+    // console.log("Passou pela busca de eventos");
+    // console.log("key value: "+this.key_value);
   }
 
   // Requisição para o servidor criar novo registro
