@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
     this.authService.login(user).subscribe(
       data => {
         console.log("Autenticação bem sucedida. \n Token de acesso: "+ data.token + '\n Role: '+data.role);
-        this.authService.saveToken(data.token, data.role).then( () => 
+        this.authService.saveToken(data.token, data.role, data.username).then( () => 
         {
           if (data.role && data.role === 'USER'){
             this.router.navigate(['tabs/tabs/tab1']);

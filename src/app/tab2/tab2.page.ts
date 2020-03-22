@@ -31,13 +31,19 @@ export class Tab2Page {
     private alertService: AlertService
   ) {
     //this.userService.getId();
-    this.userService.getToken();
+    
   }
 
   ngOnInit(){
-    // this.userService.loadUser().subscribe( 
-    //   resp =>{ this.profileUser = resp },
-    //   erro => { this.alertService.presentToast(erro.message, 'danger');}
-    // )
+    this.userService.getToken().then ( () => 
+    {
+      this.userService.getUsername().then( () => 
+      {
+        this.userService.loadUser().subscribe( 
+          resp =>{ this.profileUser = resp.body;  console.log(resp)},
+          erro => { this.alertService.presentToast(erro.message, 'danger');}
+        );
+      });
+    });
   }
 }

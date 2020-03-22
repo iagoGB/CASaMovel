@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 
 const TOKEN_KEY: string = 'Authorization';
 const ROLE_KEY: string = 'Role';
+const USERNAME_KEY: string = 'Username';
 // Para proposito de desenvolvimento apenas
 const TOKEN_VALUE: string = 'Bearer xyz1234';
 
@@ -84,12 +85,18 @@ export class AuthService {
     })
   }
 
-  saveToken(TOKEN: String,ROLE: String){
+  saveToken(TOKEN: String,ROLE: String, USERNAME: String){
     this.saveRole(ROLE);
+    this.saveUsername(USERNAME);
     console.log("Save Token"+ TOKEN);
     return this.storage.set(TOKEN_KEY,TOKEN).then(
       res => this.authState.next(true)
     );
+  }
+
+  saveUsername(USERNAME: String) {
+    console.log("Save Username: "+USERNAME);
+    return this.storage.set(USERNAME_KEY,USERNAME);
   }
 
   saveRole(ROLE: String){

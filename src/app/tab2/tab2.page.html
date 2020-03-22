@@ -1,23 +1,23 @@
 <app-header>
 </app-header>
 <ion-content>
-  <div>
+  <div *ngIf="profileUser">
     <ion-item lines="none">
       <ion-avatar class="avatar">
-        <img src="../assets/images/avatar.jpg" alt="seu avatar">
+        <img [src]="profileUser.avatar" alt="Seu avatar">
       </ion-avatar>
     </ion-item>
     <ion-item>
-      <ion-label>Nome Completo:</ion-label>
-      <ion-text>{{user.nome}}</ion-text>
+      <ion-label>Nome:</ion-label>
+      <ion-text>{{profileUser.nome}}</ion-text>
     </ion-item>
     <ion-item>
       <ion-label>Telefone:</ion-label>
-      <ion-text>{{user.telefone}}</ion-text>
+      <ion-text>{{profileUser.telefone}}</ion-text>
     </ion-item>
     <ion-item>
       <ion-label>Carga Horária Concluída</ion-label>
-      <ion-text>{{user.carga_horaria}}h / 64h</ion-text>
+      <ion-text>{{ profileUser.carga_horaria === null ? '0' : profileUser.carga_horaria }}h / 64h</ion-text>
     </ion-item>
   </div>
 </ion-content>

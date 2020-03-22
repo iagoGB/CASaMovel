@@ -22,6 +22,7 @@ export interface AuthResponse{
     token: string,
     user: string,
     role: string,
+    username: string
 }
 
 export interface User {
