@@ -19,6 +19,7 @@ export class NewEventPage implements OnInit {
 
   public categories: Categoria[];
   public speakers: Palestrante[];
+  public minDate = new Date().toISOString();
 
   public newEvent: Event = {
     id: null,

@@ -45,20 +45,26 @@ export class Tab3Page {
   }
   //Função que Solicita a listagem de eventos
   private getEvents(): void {
-    this.http.getEvents().then ( (value) =>
-    {
+    this.http.getEvents().subscribe ( (data) => {
+      this.events = data.body;
+    },(error) => {
+      this.alertService.presentToast(error, 'danger');
+    })
+    //Subscribe dentro da promise - foi refatorado
+    // this.http.getEvents().then ( (value) =>
+    // {
       
-      this.subscribe = value.subscribe(
-        (data) => 
-        { 
-          this.events = data.body; 
-        }, 
-        (erro) => 
-        {
-          this.error = true;
-          this.alertService.presentToast(erro.message, 'danger');
-        });
-    }) 
+    //   this.subscribe = value.subscribe(
+    //     (data) => 
+    //     { 
+    //       this.events = data.body; 
+    //     }, 
+    //     (erro) => 
+    //     {
+    //       this.error = true;
+    //       this.alertService.presentToast(erro.message, 'danger');
+    //     });
+    // }) 
    }
 
   //Evento assincrono para exibir modal ao clicar em deletar 

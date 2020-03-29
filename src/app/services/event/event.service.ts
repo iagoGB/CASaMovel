@@ -1,10 +1,10 @@
 import { Event } from '../../models/models';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse, HttpHeaderResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Storage } from "@ionic/storage";
 
-import { Observable, Subject } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { Observable, Subject, from } from 'rxjs';
+import { take, tap, mergeMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -27,7 +27,22 @@ export class EventService {
 
   async getToken() {
     this.key_value = await this.storage.get('Authorization');
-    console.log(" get key value: "+ this.key_value);
+  }
+
+  getTokenValue(): Promise<string> {
+    return this.storage.get('Authorization');
+  }
+
+  setHeaders(value: string ): HttpHeaders {
+    return new HttpHeaders().set('Authorization',value);
+  }
+
+  getHttpOptions(token: string, observe = 'response'): Object {
+    let httpOptions;
+    return  httpOptions = {
+      headers: this.setHeaders(token),
+      observe: observe
+    }
   }
 
   nullToken (){
@@ -39,25 +54,24 @@ export class EventService {
   }
 
   loadByID(event_id):Observable<HttpResponse<Event>> {
-    return this.http.get<Event>(`${this.url}/${event_id}`, { headers: new HttpHeaders().set('Authorization',this.key_value), observe: 'response' }).pipe(take(1));
+    // return this.http.get<Event>(`${this.url}/${event_id}`, { headers: new HttpHeaders().set('Authorization',this.key_value), observe: 'response' }).pipe(take(1));
+    return from (this.getTokenValue()).pipe( mergeMap((token) => {
+      return this.http.get<Event>(`${this.url}/${event_id}`, { headers: this.setHeaders(token), observe: 'response' }).pipe(take(1))
+    }));
   }
 
   //Retorna a variavel responsável por fazer o refresh
-  getEvents():Promise<Observable<HttpResponse<Event[]>>>{
-    return this.storage.get('Authorization').then ( (value)=> { return this.http.get<Event[]>(`${this.url}`, { headers: new HttpHeaders().set('Authorization',value), observe:'response' });});
-
-    // console.log("Passou pela busca de eventos");
-    // console.log("key value: "+this.key_value);
+  getEvents():Observable<HttpResponse<Event[]>>{
+    return from (this.getTokenValue()).pipe( mergeMap((token) => { 
+      return this.http.get<Event[]>(`${this.url}`, { headers: this.setHeaders(token), observe:'response' });
+    }));
   }
 
   // Requisição para o servidor criar novo registro
   createEvent(newEvent: Event): Observable<HttpResponse<Event>>{
-    console.log(newEvent);
-    return this.http.post<Event>(`${this.url}`, newEvent, 
-    { 
-      headers: new HttpHeaders().set('Authorization',this.key_value) , 
-      observe: 'response' 
-    });
+    return from (this.getTokenValue()).pipe( mergeMap ( (token) => {
+      return this.http.post<Event>(`${this.url}`, newEvent, {  headers: this.setHeaders(token) , observe: 'response' });
+    }));
     // .pipe(
     //   take(1),
     //   tap(() => {
@@ -69,7 +83,7 @@ export class EventService {
   
   // Requisição para o servidor atualizar registro
   updateEvent(toUpdateEvent: Event) {
-    return this.http.put(`${this.url}/${toUpdateEvent.id}`,toUpdateEvent,  { headers: new HttpHeaders().set('Authorization',this.key_value) })
+    return this.http.put(`${this.url}/${toUpdateEvent.id}`,toUpdateEvent,  { headers: this.setHeaders(this.key_value) })
     .pipe(
       take(1),
       tap(() => {
@@ -81,7 +95,7 @@ export class EventService {
 
   // Requisição para o servidor deletar registro
   removeEvent(toDeleteEvent: Event){
-    return this.http.delete(`${this.url}/${toDeleteEvent.id}`, { headers: new HttpHeaders().set('Authorization',this.key_value) })
+    return this.http.delete(`${this.url}/${toDeleteEvent.id}`, { headers:  this.setHeaders(this.key_value) })
     .pipe(
       take(1),
       tap (
@@ -92,6 +106,9 @@ export class EventService {
     );
     //pipe take 1 - Faz a requisição apenas uma única vez e encerra o observable automaticamente
   }
- 
+  
+  // subscribeEvent(){
+  //   this.http.post(`${this.url}/${event.id}?${id}`, { headers:  this.setHeaders(this.key_value) });
+  // }
 
 }

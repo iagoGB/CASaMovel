@@ -40,6 +40,8 @@
     <ion-item>
       <ion-label color="primary" position="stacked">Data do Evento</ion-label>
       <ion-datetime 
+        [min]="minDate"
+        max="2030"
         pickerFormat="DD/MMMM/YYYY HH:mm" 
         displayFormat="DDDD, DD de MMMM de YYYY HH:mm"
         month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
