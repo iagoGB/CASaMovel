@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'src/app/services/event/event.service';
 import { Event } from 'src/app/models/models';
+import { UserService } from 'src/app/services/user/user.service';
+import { AlertService } from 'src/app/services/alert/alert.service';
 
 @Component({
   selector: 'app-detail-event',
@@ -27,8 +29,10 @@ export class DetailEventPage implements OnInit {
   }
 
   constructor (
-    private http: EventService,
+    private eventService: EventService,
+    private userService: UserService,
     private route: ActivatedRoute,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -36,7 +40,7 @@ export class DetailEventPage implements OnInit {
       (params: any) => {
         const id = params['id'];
         console.log(id);
-        const event$ = this.http.loadByID(id);
+        const event$ = this.eventService.loadByID(id);
         event$.subscribe (
           data => {
             this.event = data.body;
@@ -46,4 +50,14 @@ export class DetailEventPage implements OnInit {
     )
   }
 
+  subscribeToEvent(id: number) : void {
+    this.eventService.subscribeToEvent(id)
+      .subscribe ((value) => {
+        this.alertService.presentToast("Funcionou, "+ value,'sucess')
+      },
+      (erro) => {
+        this.alertService.presentToast("Deu erro kkkkj: "+ erro, 'danger')
+      }
+    );
+  }
 }

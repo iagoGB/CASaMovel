@@ -35,15 +35,10 @@ export class Tab2Page {
   }
 
   ngOnInit(){
-    this.userService.getToken().then ( () => 
-    {
-      this.userService.getUsername().then( () => 
-      {
-        this.userService.loadUser().subscribe( 
-          resp =>{ this.profileUser = resp.body;  console.log(resp)},
-          erro => { this.alertService.presentToast(erro.message, 'danger');}
-        );
-      });
-    });
+    this.userService.loadUser()
+    .subscribe( 
+      resp => { this.profileUser = resp.body;  console.log(resp); },
+      erro => { this.alertService.presentToast(erro.message, 'danger');}
+    );
   }
 }

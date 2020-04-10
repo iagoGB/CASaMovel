@@ -6,6 +6,7 @@ import { Storage } from "@ionic/storage";
 import { Observable, Subject, from } from 'rxjs';
 import { take, tap, mergeMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class EventService {
 
   constructor(
     private http: HttpClient,
+    private userService: UserService,
     private storage: Storage
   ) {
     
@@ -107,6 +109,19 @@ export class EventService {
     //pipe take 1 - Faz a requisição apenas uma única vez e encerra o observable automaticamente
   }
   
+  subscribeToEvent(id: number) : Observable<HttpResponse<any>>{
+    //                              Result 0                  Result 1
+    return from ( Promise.all([ this.getTokenValue(), this.userService.getUsernamePromise() ]))
+    .pipe( mergeMap ( (result) => {
+      console.log("Resultado do promisse all: "+ result);
+      return this.http.post<Event>(
+        `${this.url}/subscribe`,
+        // Username único,     id do evento
+        { username: result[1], eventoid: id } ,
+        { headers: this.setHeaders(result[0]) , observe: 'response' }
+      );
+    }));
+  }
   // subscribeEvent(){
   //   this.http.post(`${this.url}/${event.id}?${id}`, { headers:  this.setHeaders(this.key_value) });
   // }

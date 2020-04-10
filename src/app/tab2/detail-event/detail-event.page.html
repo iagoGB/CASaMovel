@@ -15,7 +15,7 @@
     <p *ngFor="let palestrante of event.palestrante">{{ palestrante }}</p>
     <p>{{ event.data_horario }}</p>
     <p>{{ event.carga_horaria }}</p>
-    <ion-button size="block">PARTICIPAR</ion-button>
+    <ion-button size="block" (click)="subscribeToEvent(event.id)">PARTICIPAR</ion-button>
   </ion-list>
  
 </ion-content>

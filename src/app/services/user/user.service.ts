@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { User } from 'src/app/models/models';
-import { AuthService } from '../auth/auth.service';
 import { Storage } from '@ionic/storage';
-import { AlertService } from '../alert/alert.service';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,26 +12,33 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   private key_value: string;
   private url: string = `${environment.API}/usuario`;
-  private username_value: string;
   
   constructor( 
     private httpClient: HttpClient,
     private storage: Storage,
-    private alertService: AlertService
   ) {}
+
+  getUsernamePromise(): Promise<string> {
+    return this.storage.get('Username');
+  }
+ 
+  getTokenPromise(): Promise<string> {
+    return this.storage.get('Authorization');
+  }
     
   async getToken() {
     this.key_value = await this.storage.get('Authorization');
-    console.log(" get key value: "+ this.key_value);
   }
 
-  async getUsername(){
-    this.username_value = await this.storage.get('Username');
+  getUsername(): Observable<string> {
+    return from (this.getUsernamePromise()).pipe( mergeMap ((value: string) =>{
+      return value;
+    }));
   }
   
   nullToken (){
     this.key_value = null;
-    this.username_value = null;
+    // this.username_value = null;
   }
   
   createUser(newUser: User){
@@ -49,9 +55,11 @@ export class UserService {
   return this.httpClient.post(this.url,newUser,{ headers: }); */
 
   loadUser( ): Observable<HttpResponse<User>> {
-    console.log(`${this.url}/email/${this.username_value}`);
-    return this.httpClient.get<User>(`${this.url}/email/${this.username_value}`,
-    { headers: new HttpHeaders().set('Authorization',this.key_value), observe: 'response'});
+    return from ( Promise.all([this.getUsernamePromise(), this.getTokenPromise()]) )
+    .pipe( mergeMap ((result) => {
+      return this.httpClient.get<User>(`${this.url}/email/${result[0]}`,
+        { headers: new HttpHeaders().set('Authorization',result[1]), observe: 'response'});
+    }));
   }
 }
   
