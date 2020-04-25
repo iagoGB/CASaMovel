@@ -1,0 +1,12 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "casaMovel",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {},
+  "server": {
+    "url": "http://192.168.3.109:8100",
+    "cleartext": true
+  }
+}
