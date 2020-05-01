@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../services/event/event.service';
 import { Event, Categoria, Palestrante } from './../../models/models';
 import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
-import { AlertService } from 'src/app/services/alert/alert.service';
+import { AlertService, ToastColor } from 'src/app/services/alert/alert.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { SpeakerService } from 'src/app/services/speaker/speaker.service';
 import { Router } from '@angular/router';
@@ -51,12 +51,12 @@ export class NewEventPage implements OnInit {
     //Buscar a listagem de categoria
     this.categoryService.getAll().subscribe(
       (array)=> {   this.categories = array; this.categories.forEach ( c => console.log(c.id) )}, 
-      (erro) =>{ this.alertService.presentToast(erro,'danger') }
+      (erro) =>{ this.alertService.presentToast(erro,ToastColor.DAN) }
     )
     
     this.speakerService.getAll().subscribe(
       (array) =>  { this.speakers = array; this.speakers.forEach ( c => console.log(c.nome)) },
-      (erro) => this.alertService.presentToast(erro, 'danger')
+      (erro) => this.alertService.presentToast(erro, ToastColor.DAN)
     )
     
     //Construção do formulário reativo
@@ -112,7 +112,7 @@ export class NewEventPage implements OnInit {
       console.log(this.formulario.status);
       console.log(this.formulario.value);
       console.log("Formulario invalido");
-      this.alertService.presentToast("Formulário inválido, por favor preecha corretamente os campos",'danger');
+      this.alertService.presentToast("Formulário inválido, por favor preecha corretamente os campos",ToastColor.DAN);
     } 
     else {
       //Se o formulario estiver válido, mova para a variável evento 
@@ -128,17 +128,17 @@ export class NewEventPage implements OnInit {
           console.log("Response Body: " + JSON.stringify(resp));
 
           if (resp.ok) {
-            this.alertService.presentToast('Novo evento criado!','dark');
+            this.alertService.presentToast('Novo evento criado!',ToastColor.DARK);
             this.router.navigate([`detail-event/${resp.body.id}`]);
           } else {
             console.log("Ocorreu um erro cai no if");
-            this.alertService.presentToast(JSON.stringify( resp.statusText ),'danger');
+            this.alertService.presentToast(JSON.stringify( resp.statusText ),ToastColor.DAN);
           } 
           
         },
         erro =>{ 
           console.log("Deu erro ae"+ erro);
-          this.alertService.presentToast(erro,'danger'); 
+          this.alertService.presentToast(erro,ToastColor.DAN); 
         }
 
       );

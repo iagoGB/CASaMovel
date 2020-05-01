@@ -1,6 +1,6 @@
 import { Event } from '../../models/models';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { Storage } from "@ionic/storage";
 
 import { Observable, Subject, from } from 'rxjs';
@@ -27,6 +27,9 @@ export class EventService {
     
   };
 
+  getDatas(): Observable<string[]>{
+    return from ( Promise.all([ this.getTokenValue(), this.userService.getUsernamePromise() ]));
+  }
   async getToken() {
     this.key_value = await this.storage.get('Authorization');
   }
@@ -114,16 +117,27 @@ export class EventService {
     return from ( Promise.all([ this.getTokenValue(), this.userService.getUsernamePromise() ]))
     .pipe( mergeMap ( (result) => {
       console.log("Resultado do promisse all: "+ result);
-      return this.http.post<Event>(
-        `${this.url}/subscribe`,
+      return this.http.put<Event>(
+        `${this.url}/${id}/inscricao`,
         // Username único,     id do evento
-        { username: result[1], eventoid: id } ,
-        { headers: this.setHeaders(result[0]) , observe: 'response' }
+        // { username: result[1], eventoid: id } , 
+        {},
+        { headers: this.setHeaders(result[0]) , observe: 'response', params: { username: result[1] }, responseType:'json'}
       );
     }));
   }
-  // subscribeEvent(){
-  //   this.http.post(`${this.url}/${event.id}?${id}`, { headers:  this.setHeaders(this.key_value) });
-  // }
 
+  unsubscribeToEvent(id: number) : Observable<HttpResponse<any>>{
+    //                              Result 0                  Result 1
+    return this.getDatas()
+    .pipe( mergeMap ( (result) => {
+      return this.http.put<Event>(
+        `${this.url}/${id}/remover-inscricao`,
+        // Username único,     id do evento
+        {},
+        { headers: this.setHeaders(result[0]) , observe: 'response', params: { username: result[1] }, responseType:'json'}
+      );
+    }));
+  }
+  
 }

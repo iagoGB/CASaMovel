@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { EventService } from '../services/event/event.service';
 import { Event } from './../models/models';
 import { AlertController } from '@ionic/angular';
-import { AlertService } from '../services/alert/alert.service';
+import { AlertService, ToastColor } from '../services/alert/alert.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -48,7 +48,7 @@ export class Tab3Page {
     this.http.getEvents().subscribe ( (data) => {
       this.events = data.body;
     },(error) => {
-      this.alertService.presentToast(error, 'danger');
+      this.alertService.presentToast(error, ToastColor.DAN);
     })
     //Subscribe dentro da promise - foi refatorado
     // this.http.getEvents().then ( (value) =>

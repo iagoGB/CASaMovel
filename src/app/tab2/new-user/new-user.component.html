@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Novo Usuário</ion-title>
+    <ion-title>Novo Usuário kkj</ion-title>
     <ion-back-button text="Voltar"></ion-back-button>
   </ion-toolbar>
 </ion-header>
@@ -18,6 +18,12 @@
     <ion-item>
       <ion-label color="primary" position="stacked">Email</ion-label>
       <ion-input  type="text"  formControlName="email"></ion-input>
+      <ion-note color="danger" *ngIf="formulario.get('email').errors?.usernameTaken">
+        <p>E-mail já está em uso.</p>
+      </ion-note>
+      <ion-note color="secondary" *ngIf="!formulario.get('email').errors?.usernameTaken && formulario.get('email').valid">
+        <p>Você pode usar este email.</p>
+      </ion-note>
     </ion-item>
     <ion-item>
       <ion-label color="primary" position="stacked">Senha</ion-label>
@@ -43,6 +49,6 @@
       </ion-datetime>
     </ion-item>
   </form>
-  <ion-button size="block"  type="submit" (click)="onSubmit();">CRIAR</ion-button>
+  <ion-button size="block"  [disabled]="formulario.pending || formulario.invalid" type="submit" (click)="onSubmit();">CRIAR</ion-button>
 </ion-content>
 

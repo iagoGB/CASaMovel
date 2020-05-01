@@ -30,36 +30,32 @@ export class UserService {
     this.key_value = await this.storage.get('Authorization');
   }
 
-  getUsername(): Observable<string> {
-    return from (this.getUsernamePromise()).pipe( mergeMap ((value: string) =>{
-      return value;
-    }));
+  getUserData() : Observable<string[]> {
+    return from ( Promise.all ( [this.getUsernamePromise(), this.getTokenPromise()] ) );
   }
   
   nullToken (){
     this.key_value = null;
-    // this.username_value = null;
   }
   
   createUser(newUser: User){
     return this.httpClient.post(this.url,newUser,{ headers: new HttpHeaders().set('Authorization',this.key_value) });
   }
-  /*
-  var headers = new HttpHeaders();
-  headers.append('Access-Control-Allow-Origin' , '*');
-  headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-  headers.append('Accept','application/json');
-  headers.append('content-type','application/json');
-  headers.append('Authorization', )
-  console.log(headers);
-  return this.httpClient.post(this.url,newUser,{ headers: }); */
 
   loadUser( ): Observable<HttpResponse<User>> {
-    return from ( Promise.all([this.getUsernamePromise(), this.getTokenPromise()]) )
+    return this.getUserData()
     .pipe( mergeMap ((result) => {
-      return this.httpClient.get<User>(`${this.url}/email/${result[0]}`,
-        { headers: new HttpHeaders().set('Authorization',result[1]), observe: 'response'});
+      return this.httpClient.get<User>(`${this.url}/email`,
+        { headers: new HttpHeaders().set('Authorization',result[1]), observe: 'response', params: { username: result[0] } });
     }));
   }
+
+  checkUsermailIsTaken(targetEmail : string): Observable<HttpResponse<User>> {
+    return this.getUserData()
+    .pipe( mergeMap((result) => {
+      return this.httpClient.get<User>(`${this.url}/email`,
+        { headers: new HttpHeaders().set('Authorization',result[1]), observe: 'response', params: { username: targetEmail } });
+    }));
+  } 
 }
   

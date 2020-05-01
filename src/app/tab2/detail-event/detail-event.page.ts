@@ -4,7 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'src/app/services/event/event.service';
 import { Event } from 'src/app/models/models';
 import { UserService } from 'src/app/services/user/user.service';
-import { AlertService } from 'src/app/services/alert/alert.service';
+import { AlertService, ToastColor } from 'src/app/services/alert/alert.service';
+
+
 
 @Component({
   selector: 'app-detail-event',
@@ -12,6 +14,8 @@ import { AlertService } from 'src/app/services/alert/alert.service';
   styleUrls: ['./detail-event.page.scss'],
 })
 export class DetailEventPage implements OnInit {
+
+  public subscribed: boolean;
 
   public event: Event = {
     id : null,
@@ -44,19 +48,38 @@ export class DetailEventPage implements OnInit {
         event$.subscribe (
           data => {
             this.event = data.body;
+            this.userService.loadUser().subscribe( (resp)=>{
+              this.subscribed = resp.body.eventos.some(event => event.id === this.event.id);
+            })
           }
-        )
+        );
+        
       }
-    )
+    );
+
+
   }
 
   subscribeToEvent(id: number) : void {
     this.eventService.subscribeToEvent(id)
       .subscribe ((value) => {
-        this.alertService.presentToast("Funcionou, "+ value,'sucess')
+        this.alertService.presentToast("Você foi inserido na lista de participantes",ToastColor.PRI);
+        this.subscribed = true;
       },
       (erro) => {
-        this.alertService.presentToast("Deu erro kkkkj: "+ erro, 'danger')
+        this.alertService.presentToast(erro, ToastColor.DAN)
+      }
+    );
+  }
+
+  unsubscribeToEvent(id: number) : void {
+    this.eventService.unsubscribeToEvent(id)
+      .subscribe ((value) => {
+        this.alertService.presentToast("Você não está mais inscrito no evento",ToastColor.DARK);
+        this.subscribed = false;
+      },
+      (erro) => {
+        this.alertService.presentToast("Ocorreu um erro ao solicitar remoção do evento. Tente novamente", ToastColor.DAN)
       }
     );
   }

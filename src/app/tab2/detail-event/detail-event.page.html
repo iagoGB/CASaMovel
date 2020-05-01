@@ -15,7 +15,12 @@
     <p *ngFor="let palestrante of event.palestrante">{{ palestrante }}</p>
     <p>{{ event.data_horario }}</p>
     <p>{{ event.carga_horaria }}</p>
-    <ion-button size="block" (click)="subscribeToEvent(event.id)">PARTICIPAR</ion-button>
+    <p *ngIf="subscribed"> Status: Inscrito </p>
+    <p *ngIf="!subscribed"> Status: Não Inscrito </p>
+    <ion-button size="block"  color="danger" (click)="unsubscribeToEvent(event.id)" *ngIf="subscribed else subscribeButton ">CANCELAR INSCRIÇÃO</ion-button>
+    <ng-template #subscribeButton>
+      <ion-button size="block" (click)="subscribeToEvent(event.id)">PARTICIPAR</ion-button>
+    </ng-template>
   </ion-list>
  
 </ion-content>

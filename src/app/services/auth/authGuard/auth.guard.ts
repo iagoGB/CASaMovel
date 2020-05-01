@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { AuthService } from './../auth.service';
-import { AlertService } from '../../alert/alert.service';
+import { AlertService, ToastColor } from '../../alert/alert.service';
 import { throws } from 'assert';
 
 @Injectable({
@@ -27,13 +27,13 @@ export class AuthGuard implements CanActivate {
           if (data === expectedRole) {
             return true;
           } else {
-            this.alertService.presentToast('Usuário não possui autorização para acesso!', 'danger');
+            this.alertService.presentToast('Usuário não possui autorização para acesso!',ToastColor.DAN);
             return this.router.parseUrl('/login');
           }
         }
       )
     } else {
-      this.alertService.presentToast('Você não está logado!', 'danger');
+      this.alertService.presentToast('Você não está logado!',ToastColor.DAN);
       return this.router.parseUrl('/login');
     }
   }

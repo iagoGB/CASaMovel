@@ -31,10 +31,10 @@
       <ion-col size="6">
           <ion-button size="large">
             <ion-icon name="people-sharp" slot="start"></ion-icon>
-              Usuários 
+            Usuários 
           </ion-button>
           <ion-item  no-padding text-center>
-            <ion-label> Criar </ion-label>
+            <ion-label > <a [routerLink]="['/new-user']" >Criar</a> </ion-label>
           </ion-item>
           <ion-item   text-center no-padding no-margin>
              <ion-label> Consultar </ion-label>
@@ -50,7 +50,7 @@
     <ion-row>
         <ion-col>
             <ion-button size="large">
-                <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+              <ion-icon name="help-circle-outline" slot="start"></ion-icon>
                Ajuda
             </ion-button>
             <ion-item  no-padding text-center>

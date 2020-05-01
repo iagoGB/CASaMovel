@@ -2,7 +2,7 @@ import { AuthUser } from './../models/models';
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './../services/auth/auth.service';
-import { AlertService } from '../services/alert/alert.service';
+import { AlertService, ToastColor } from '../services/alert/alert.service';
 import { Router } from '@angular/router';
 
 
@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
           }
         })
       },
-      erro => this.alertService.presentToast(erro.message, 'danger')
+      erro => this.alertService.presentToast(erro.message, ToastColor.DAN)
     );
   }
 }

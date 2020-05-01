@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../models/models';
 import { UserService } from '../services/user/user.service';
-import { AlertService } from '../services/alert/alert.service';
+import { AlertService, ToastColor } from '../services/alert/alert.service';
 
 @Component({
   selector: 'app-tab2',
@@ -38,7 +38,7 @@ export class Tab2Page {
     this.userService.loadUser()
     .subscribe( 
       resp => { this.profileUser = resp.body;  console.log(resp); },
-      erro => { this.alertService.presentToast(erro.message, 'danger');}
+      erro => { this.alertService.presentToast(erro.message, ToastColor.DAN);}
     );
   }
 }

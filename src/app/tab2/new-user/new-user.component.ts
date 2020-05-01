@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { AlertService } from 'src/app/services/alert/alert.service';
+import { AlertService, ToastColor } from 'src/app/services/alert/alert.service';
 import { User } from 'src/app/models/models';
 import { UserService } from 'src/app/services/user/user.service';
+import { UserNotTakenValidatorService } from 'src/app/services/validators/user-not-taken-validator.service';
 
 @Component({
   selector: 'app-new-user',
@@ -32,7 +33,8 @@ export class NewUserComponent implements OnInit {
 
   constructor (
     private userService : UserService, 
-    private alertService : AlertService
+    private userNotTakenService: UserNotTakenValidatorService,
+    private alertService : AlertService,
   ) { }
 
   ngOnInit() {
@@ -43,7 +45,7 @@ export class NewUserComponent implements OnInit {
         cpf: new FormControl(null, Validators.required),
         telefone:new FormControl(null, Validators.required),
         data_ingresso: new FormControl(null, Validators.required),
-        email: new FormControl(null, Validators.required),
+        email: new FormControl(null, Validators.required, this.userNotTakenService.checkUsernameTaken()),
         senha: new FormControl(null, Validators.required),
         departamento: new FormControl(null, Validators.required)
       });
@@ -61,12 +63,12 @@ export class NewUserComponent implements OnInit {
   }
   //Função para criação do usuário
   onSubmit(): void {
-    if (this.formulario.status === "INVALID"){
+    if (this.formulario.invalid || this.formulario.pending ){
       //Se o formulario estiver inválido, diga ao usuário
       console.log(this.formulario.status);
       console.log(this.formulario.value);
       console.log("Formulario invalido");
-      this.alertService.presentToast("Formulário inválido, por favor preecha corretamente os campos",'danger');
+      this.alertService.presentToast("Formulário inválido, por favor preecha corretamente os campos",ToastColor.DAN);
     } 
     else {
       //Se o formulario estiver válido, mova para a variável evento 
@@ -75,11 +77,11 @@ export class NewUserComponent implements OnInit {
       //Envie para o servidor
       this.userService.createUser(this.newUser).subscribe(
         resp => {
-          this.alertService.presentToast(resp.toString(),'dark')
+          this.alertService.presentToast(resp.toString(),ToastColor.DARK)
           console.log('Deu certo o observable');
         },
         erro => {
-          this.alertService.presentToast(erro,'danger');
+          this.alertService.presentToast(erro,ToastColor.DAN);
           console.log('Não Deu certo o observable');
         }
       );
