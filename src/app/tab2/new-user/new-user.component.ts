@@ -45,7 +45,14 @@ export class NewUserComponent implements OnInit {
         cpf: new FormControl(null, Validators.required),
         telefone:new FormControl(null, Validators.required),
         data_ingresso: new FormControl(null, Validators.required),
-        email: new FormControl(null, Validators.required, this.userNotTakenService.checkUsernameTaken()),
+        email: new FormControl(
+          null, 
+          [
+            Validators.required,
+            Validators.email
+          ], 
+          this.userNotTakenService.checkUsernameTaken()
+        ),
         senha: new FormControl(null, Validators.required),
         departamento: new FormControl(null, Validators.required)
       });

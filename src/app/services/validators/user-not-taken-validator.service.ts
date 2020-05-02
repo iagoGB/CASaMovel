@@ -20,8 +20,6 @@ export class UserNotTakenValidatorService {
           return this.userService.checkUsermailIsTaken(username);
         }))
         .pipe(map((httpResp: HttpResponse<User> ) => {
-          console.log("Chamoustes");
-          console.log(httpResp.body);
           return httpResp.body ? { usernameTaken: true } : null
         }))
         .pipe(first());
