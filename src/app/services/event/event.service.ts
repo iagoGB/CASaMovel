@@ -77,13 +77,6 @@ export class EventService {
     return from (this.getTokenValue()).pipe( mergeMap ( (token) => {
       return this.http.post<Event>(`${this.url}`, newEvent, {  headers: this.setHeaders(token) , observe: 'response' });
     }));
-    // .pipe(
-    //   take(1),
-    //   tap(() => {
-    //       this._refreshNeeded.next();
-    //   })
-    // );
-    //pipe take 1 Faz a requisição apenas uma única vez e encerra o observable automaticamente
   }
   
   // Requisição para o servidor atualizar registro
@@ -135,6 +128,21 @@ export class EventService {
         `${this.url}/${id}/remover-inscricao`,
         // Username único,     id do evento
         {},
+        { headers: this.setHeaders(result[0]) , observe: 'response', params: { username: result[1] }, responseType:'json'}
+      );
+    }));
+  }
+
+  registerPresence(qrcode: string): Observable<HttpResponse<any>>{
+    // QRCode sempre sera formado por uma string aleatória separado do id do evento 
+    // exemplo: XXyZ20-10
+    let qrcoderesult = qrcode.split("-");
+    return this.getDatas()
+    .pipe( mergeMap ( (result) => {
+      return this.http.put<Event>(
+        `${this.url}/${qrcoderesult[1]}/registro-presenca`,
+        // Username único,     id do evento
+        { keyword: qrcoderesult[0], username: result[1] },
         { headers: this.setHeaders(result[0]) , observe: 'response', params: { username: result[1] }, responseType:'json'}
       );
     }));

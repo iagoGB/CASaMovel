@@ -1,4 +1,4 @@
-package br.com.casamovel.ufc;
+package io.ionic.starter;
 
 import android.os.Bundle;
 

@@ -25,7 +25,7 @@ export class AlertService {
    //Feedback de situação para o usuário
     async presentToast(
       msg : string,color : ToastColor ,position? : string,
-      closeButton?: boolean, duration?: number 
+      closeButton?: boolean, duration: number = 3000
     ) 
     {
       const toast = await this.toastController.create({
@@ -38,7 +38,7 @@ export class AlertService {
             role: 'cancel'
           }
         ],
-        duration: 3000
+        duration: duration
       });
       toast.present();
     }

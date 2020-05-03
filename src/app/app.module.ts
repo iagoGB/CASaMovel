@@ -16,6 +16,7 @@ import { AuthService } from './services/auth/auth.service';
 import { IonicStorageModule } from "@ionic/storage";
 import { NewUserComponent } from './tab2/new-user/new-user.component';
 import { UserService } from './services/user/user.service';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [
@@ -40,12 +41,9 @@ import { UserService } from './services/user/user.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     EventService,
     UserService,
-    AuthService
+    AuthService,
+    BarcodeScanner
   ],
   bootstrap: [AppComponent]
-  /*
-  exports:[
-    ReactiveFormsModule
-  ] */
 })
 export class AppModule {}
