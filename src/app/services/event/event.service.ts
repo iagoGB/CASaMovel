@@ -1,12 +1,14 @@
 import { Event } from '../../models/models';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpParams, HttpRequest } from '@angular/common/http';
 import { Storage } from "@ionic/storage";
 
 import { Observable, Subject, from } from 'rxjs';
 import { take, tap, mergeMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../user/user.service';
+import { formatDate } from '@angular/common';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -96,6 +98,20 @@ export class EventService {
       })
     );
     //pipe take 1 - Faz a requisição apenas uma única vez e encerra o observable automaticamente
+  }
+
+  updateImageEvent(eventId: number, file: File){
+    const formData: FormData = new FormData();
+    formData.append('image', file, file.name);
+    return from ( Promise.all([ this.getTokenValue(), this.userService.getUsernamePromise() ]))
+    .pipe( mergeMap ( (result) => {
+        return this.http.post(
+          `${this.url}/${eventId}/upload`, 
+          formData ,
+          { headers: new HttpHeaders( { 'Authorization': result[0]  }) }
+        )
+        // const request = new HttpRequest('POST', `${this.url}/${eventId}/upload`,)
+    }));
   }
 
   // Requisição para o servidor deletar registro

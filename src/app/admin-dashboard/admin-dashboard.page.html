@@ -16,10 +16,10 @@
             Eventos
           </ion-button >
           <ion-item  no-padding text-center>
-            <ion-label> <a href="/new-event">Criar</a> </ion-label>
+            <ion-label> <a [routerLink]="['/novo-evento']">Criar</a> </ion-label>
           </ion-item>
           <ion-item   text-center no-padding no-margin>
-             <ion-label> Consultar </ion-label>
+             <ion-label> <a [routerLink]="['/tabs/tabs/tab3']">Consultar</a> </ion-label>
         </ion-item>
         <ion-item  text-center no-padding no-margin>
             <ion-label> Atualizar </ion-label>
