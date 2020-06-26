@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AdminDashboardPage } from './admin-dashboard.page';
+import { SharedComponentModule } from '../shared-component.module';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedComponentModule,
     RouterModule.forChild(routes)
   ],
   declarations: [AdminDashboardPage]

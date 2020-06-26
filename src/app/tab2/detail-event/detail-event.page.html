@@ -6,7 +6,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-img class="ion-padding"  *ngIf="event" [src]="'http://localhost:9999/evento/imagem/'+ event.foto" id="foto"></ion-img> 
+  <ion-img class="ion-padding"  *ngIf="event" [src]="'http://localhost:9999/evento/imagem/'+ event.foto" error="this.src='../assets/images/PAAP.png'" id="foto"></ion-img> 
   <input style="display: none" type="file" name="image" id="image" (change)="updateEventImage($event);" #imageUpdate>
   <ion-button  *ngIf="actualRole === 'ADMIN'" (click)="openInputFile();">Alterar Foto</ion-button>
   <ion-list class="ion-padding" *ngIf="event">

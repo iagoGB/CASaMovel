@@ -1,15 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-back-button [defaultHref]="['/admin-dashboard']"></ion-back-button>
-    <ion-title>Novo Evento</ion-title>
+    <ion-back-button slot="start" [defaultHref]="['/admin-dashboard']"></ion-back-button>
+    <ion-title slot="end">Novo Evento</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <form [formGroup]="formulario">
-    <ion-item>
-      <input type="file" name="image" id="image" (change)="inputFileChange($event)">
-    </ion-item> <br/>
     <!-- <div *ngIf="categories">
       <div *ngFor="let c of categories">
         <p>c.categoria_id</p>  
