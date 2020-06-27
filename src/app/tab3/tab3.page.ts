@@ -16,6 +16,9 @@ export class Tab3Page {
   public events: Event[];
   public error: boolean;
   private subscribe: Subscription;
+  months: string[] = [ 
+    "Jan", "Fev", "Mar","Abr", "Mai", "Jun", "Jul","Ago", "Set", "Out", "Nov", "Dez" 
+  ]
 
   constructor ( 
     //Injeção das dependências 
@@ -99,6 +102,19 @@ export class Tab3Page {
   //Evento para solicitar a ação de delete ao serviço http.
   remove( event: Event ): void {
     this.http.removeEvent(event).subscribe();
+  }
+
+  getDay( date:any ): string {
+    return new Date(date).getDate().toString();
+  }
+
+  getMonth( date: any ): string {
+    return this.months[ new Date(date).getMonth() ];
+  }
+
+  getHour (date:any ): string {
+    console.log(new Date(date));
+    return new Date(date).getHours().toString()+"h";
   }
   
 }
