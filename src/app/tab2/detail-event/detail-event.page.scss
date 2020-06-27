@@ -1,0 +1,61 @@
+h5{
+    color: black;
+}
+p {
+    font-size: 12px;
+    color: grey;
+}
+
+ion-icon {
+    color: black;
+    margin-top: -10px;
+}
+
+ion-icon.cancel-filled {
+    color: red;
+}
+
+ion-icon.check-filled {
+    color: green;
+}
+
+ion-icon.no-filled {
+    color: lightgrey;
+}
+
+
+
+p {
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 1px solid #FFf;
+}
+
+sup {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+span {
+    padding-bottom: 0px;
+}
+
+span.label {
+    font-weight: bold;
+}
+
+div.row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+div.end {
+    display: flex;
+    justify-content: end;
+}
+
+.btnSpace {
+    margin-top: 3px;
+    margin-right: -5px;
+}

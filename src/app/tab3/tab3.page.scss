@@ -1,23 +1,23 @@
 ion-text {
     h1 {
         font-size: 27px;
-        color: white;
+        color: #00A295 ;
         font-weight: bold;
     }
     h4{
         margin-top: -5px;
-        color: white;
+        color: #00A295 ;
     }
     p{  
-        margin-top: 5px;
-        color: white;
+        margin-top: 12px;
+        color: #00A295;
     }
 }
 
 ion-row {
     h4.hour {
         margin-top: -10px;
-        color: white;
+        color: #F9C5AF;
         font-style: italic;
     }
 }
@@ -44,13 +44,13 @@ div.waiting {
 }
 
 .background {
-    background-color:#00A295 ; 
+    // background-color:#00A295 ; 
     //  #F9C5AF #3D3266;
     border-radius: 10px;
 }
 
 .vertical-divider {
-    border-right: 2px solid #F9C5AF;
+    border-right: 3px solid #F9C5AF;
 }
 
 

@@ -6,7 +6,7 @@
           <ion-item-sliding  class="">
 
               
-                <div [routerLink]="['/detail-event',event.id]" *ngFor = "let event of events" class="background ion-justify-content-between ion-padding ion-margin"> 
+                <ion-card [routerLink]="['/detail-event',event.id]" *ngFor = "let event of events" class="background ion-justify-content-between ion-padding ion-margin"> 
                   <ion-row size-md="6" size-lg="6" size-xl="6">
                     <ion-col class="vertical-divider" size="2">
                       <ion-text>
@@ -29,7 +29,7 @@
                     <h4 class="hour ion-no-padding ion-no-margin">{{ getHour(event.data_horario) }}</h4>
                   </ion-row>
                   
-                </div>
+                </ion-card>
              
 
           </ion-item-sliding>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'src/app/services/event/event.service';
@@ -6,6 +6,8 @@ import { Event } from 'src/app/models/models';
 import { UserService } from 'src/app/services/user/user.service';
 import { AlertService, ToastColor } from 'src/app/services/alert/alert.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { environment } from 'src/environments/environment';
+
 
 
 
@@ -19,6 +21,7 @@ export class DetailEventPage implements OnInit {
 
   public subscribed: boolean;
   public actualRole: string;
+  public api: string = environment.API;
 
   public event: Event = {
     id : null,
