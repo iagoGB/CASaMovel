@@ -1,15 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Novo Evento</ion-title>
-    <ion-back-button text="Voltar"></ion-back-button>
+    <ion-back-button slot="start" [defaultHref]="['/admin-dashboard']"></ion-back-button>
+    <ion-title slot="end">Novo Evento</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <form [formGroup]="formulario">
-    <ion-item>
-      <input type="file" name="image" id="image" (change)="inputFileChange($event)">
-    </ion-item> <br/>
     <!-- <div *ngIf="categories">
       <div *ngFor="let c of categories">
         <p>c.categoria_id</p>  
@@ -60,5 +57,5 @@
       <ion-input   type="number" formControlName="carga_horaria"></ion-input>
     </ion-item>
   </form>
-  <ion-button size="block"  type="submit" (click)="onSubmit();">CRIAR</ion-button>
+  <ion-button size="block" [disabled]="formulario.invalid" type="submit" (click)="onSubmit();">CRIAR</ion-button>
 </ion-content>

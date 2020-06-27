@@ -14,7 +14,7 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule) 
   },
   { 
-    path: 'new-event', 
+    path: 'novo-evento', 
     loadChildren: () => import('./tab2/new-event/new-event.module').then(m => m.NewEventPageModule),
   },
   {
@@ -33,7 +33,7 @@ const routes: Routes = [
     path: 'tabs', 
     canActivate:[ AuthGuard ],
     data: {
-      role: 'USER'
+      role: ['USER', 'ADMIN']
     },
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },

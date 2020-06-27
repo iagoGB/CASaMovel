@@ -29,10 +29,8 @@ export class LoginPage implements OnInit {
   }
 
   login(user: AuthUser){
-    console.log("Dados que estão sendo enviados para o servidor: "+ user.email, "\n"+ user.senha);
     this.authService.login(user).subscribe(
       data => {
-        console.log("Autenticação bem sucedida. \n Token de acesso: "+ data.token + '\n Role: '+data.role);
         this.authService.saveToken(data.token, data.role, data.username).then( () => 
         {
           if (data.role && data.role === 'USER'){

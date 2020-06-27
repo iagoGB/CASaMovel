@@ -98,13 +98,6 @@ export class NewEventPage implements OnInit {
   ngOnDestroy(){
     this.eventService.nullToken();
   }
-
-  //Checkar arquivos
-  inputFileChange(event){
-    if (event.target.files && event.target.files[0]){
-      const img = event.taret.files[0];
-    }
-  }
   //Função para criação do evento
   onSubmit(): void {
     if (this.formulario.status === "INVALID"){

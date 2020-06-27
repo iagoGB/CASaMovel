@@ -18,17 +18,26 @@ export class AuthGuard implements CanActivate {
 
 
   canActivate(route: ActivatedRouteSnapshot) {
-    let expectedRole: string = route.data.role;
+    let expectedRole: any = route.data.role;
     let userRole: string = null;
     console.log('Role necessária: ' + expectedRole);
     if (this.authService.isAuth()) {
       return this.authService.checkRole().then(
         data => {
-          if (data === expectedRole) {
-            return true;
+          const isArray: boolean = Array.isArray(expectedRole);
+          if (!isArray){
+
+            if (data === expectedRole) {
+              return true;
+            } else {
+              this.alertService.presentToast('Usuário não possui autorização para acesso!',ToastColor.DAN);
+              return this.router.parseUrl('/login');
+            }
+
           } else {
-            this.alertService.presentToast('Usuário não possui autorização para acesso!',ToastColor.DAN);
-            return this.router.parseUrl('/login');
+            let array: Array<boolean> = expectedRole.map( expected => this.isAuthorized(data, expected));
+            if (array.includes(true))
+              return true;
           }
         }
       )
@@ -36,5 +45,9 @@ export class AuthGuard implements CanActivate {
       this.alertService.presentToast('Você não está logado!',ToastColor.DAN);
       return this.router.parseUrl('/login');
     }
+  }
+
+  isAuthorized(actualRole: string, expectedRole: string){
+      return actualRole === expectedRole ? true: false
   }
 }

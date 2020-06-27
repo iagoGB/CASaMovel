@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './header/header.component';
+import { AccordionListComponent } from './accordion-list/accordion-list.component';
 
 @NgModule({
     imports:[
@@ -12,10 +13,12 @@ import { HeaderComponent } from './header/header.component';
         FormsModule
     ],
     declarations:[
-        HeaderComponent
+        HeaderComponent,
+        AccordionListComponent
     ],
     exports:[
-        HeaderComponent
+        HeaderComponent,
+        AccordionListComponent
     ]
 })
 export class SharedComponentModule{}

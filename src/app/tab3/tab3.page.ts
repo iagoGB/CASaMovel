@@ -19,6 +19,9 @@ export class Tab3Page {
   public error: boolean;
   private subscribe: Subscription;
   private data: any;
+  months: string[] = [ 
+    "Jan", "Fev", "Mar","Abr", "Mai", "Jun", "Jul","Ago", "Set", "Out", "Nov", "Dez" 
+  ]
 
   constructor ( 
     private eventService: EventService, 
@@ -126,4 +129,18 @@ export class Tab3Page {
         this.alertService.presentToast(err.body.mensagem || err.body.message || err.body.erro,ToastColor.DAN);
     })
   }
+  
+  getDay( date:any ): string {
+    return new Date(date).getDate().toString();
+  }
+
+  getMonth( date: any ): string {
+    return this.months[ new Date(date).getMonth() ];
+  }
+
+  getHour (date:any ): string {
+    console.log(new Date(date));
+    return new Date(date).getHours().toString()+"h";
+  }
+  
 }

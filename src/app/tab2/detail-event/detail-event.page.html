@@ -1,26 +1,67 @@
 <ion-header>
   <ion-toolbar>
-    <ion-back-button></ion-back-button>
-    <ion-title>detail-event</ion-title>
+    <ion-back-button slot="start" [defaultHref]="['/tabs/tabs/tab1']"></ion-back-button>
+    <ion-title slot="end">Evento</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-img class="ion-padding" src="http://www.casa.ufc.br/wp-content/uploads/2019/05/14-05-2019-laboratorio-de-praticas-docentes.corrigido.jpg"></ion-img> <!-- src="http://www.fjmangabeira.org.br/wp-content/uploads/2017/05/Curso.jpg"-->
-  <ion-list class="ion-padding" *ngIf="event">
-    <ion-header>
-      {{ event.id }}: {{ event.titulo }}
-    </ion-header>
-    <p>{{ event.localizacao }}</p>
+  <ion-title class="ion-text-center  ion-text-justify text-wrap">
+    <!-- <ion-icon class="calendar" size="large" name="calendar-outline"></ion-icon> -->
+    {{ event.titulo }}
+  </ion-title>
+  <ion-img class="ion-padding"  *ngIf="event" [src]="api + '/evento/imagem/'+ event.foto" error="this.src='../assets/images/PAAP.png'" id="foto"></ion-img> 
+  <input style="display: none" type="file" name="image" id="image" (change)="updateEventImage($event);" #imageUpdate>
+  <ion-button  *ngIf="actualRole === 'ADMIN'" (click)="openInputFile();">Alterar Foto</ion-button>
+  <ion-card class="ion-padding" *ngIf="event">
+    
+    <div class="row">
+      
+      <ion-icon size="large" name="location-outline"></ion-icon> 
+      <div>
+        <!-- <span class="label">Local: </span> -->
+        <span slot="end">{{ event.localizacao }}</span>
+      </div>
+      
+    </div>
     <p *ngFor="let palestrante of event.palestrante">{{ palestrante }}</p>
-    <p>{{ event.data_horario }}</p>
-    <p>{{ event.carga_horaria }}</p>
-    <p *ngIf="subscribed"> Status: Inscrito </p>
-    <p *ngIf="!subscribed"> Status: Não Inscrito </p>
-    <ion-button size="block"  color="danger" (click)="unsubscribeToEvent(event.id)" *ngIf="subscribed else subscribeButton ">CANCELAR INSCRIÇÃO</ion-button>
+
+    <div  class="row">
+    
+      <ion-icon size="large" name="time-outline"></ion-icon>
+      <div>
+        <!-- <span class="label">Data: </span> -->
+        <span>{{ event.data_horario}}</span>
+      </div>
+      
+    </div>
+    <div  class="row">
+      <!-- <ion-icon size="large" name="time-outline"><sup><ion-icon name="arrow-up-outline"></ion-icon></sup></ion-icon> -->
+      <span class="label">Carga Horária: </span>
+      <div>
+        <span>{{ event.carga_horaria }}h</span>
+      </div>
+    </div>
+    <div class="row" *ngIf="subscribed" (click)="unsubscribeToEvent(event.id)"> 
+      <span class="label"> Inscrição:  </span> 
+      <div class="btnSpace">
+        <ion-icon size="large" class="check-filled" name="checkmark-circle-outline"></ion-icon> 
+        <ion-icon size="large" class="no-filled" name="close-outline"></ion-icon>
+      </div>
+      
+    </div>
+    <div class="row" *ngIf="!subscribed" (click)="subscribeToEvent(event.id)"> 
+      <span class="label">Inscrição: </span>
+      <div class="btnSpace">
+        <ion-icon size="large" class="no-filled" name="checkmark-outline"></ion-icon> 
+        <ion-icon size="large" class="cancel-filled" name="close-circle-outline"></ion-icon>
+      </div>
+    </div>
+    <!-- <ion-button size="block"  color="danger" (click)="unsubscribeToEvent(event.id)" *ngIf="subscribed else subscribeButton ">CANCELAR INSCRIÇÃO</ion-button>
+  
     <ng-template #subscribeButton>
       <ion-button size="block" (click)="subscribeToEvent(event.id)">PARTICIPAR</ion-button>
-    </ng-template>
-  </ion-list>
+    </ng-template> -->
+  </ion-card>
  
 </ion-content>

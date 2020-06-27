@@ -1,55 +1,53 @@
 <app-header></app-header>
   <!-- Conteudo-->
-<ion-content class="ion-padding">
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button (click)="startScan()" >
-        <ion-icon name="scan"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-    <ion-list *ngIf ="events"> <!--  #scheduleList [hidden]="shownSessions === 0" -->
-        <ion-item-group> <!-- [hidden]="group.hide -->
+<ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="startScan()" >
+      <ion-icon name="scan"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+    <ion-list *ngIf ="events"> 
     
-          <ion-item-sliding>
+          <ion-item-sliding  class="">
 
-            <ion-item *ngFor = "let event of events"> <!-- routerLink="/app/tabs/schedule/session/{{session.id}} -->
-              <ion-label>
-                <ion-header>
-                    {{ event.titulo }}
-                    <ion-button slot="end" class="no-margin no-padding" [routerLink]="['/edit-event',event.id]">
-                      <ion-icon size="small" name="create"></ion-icon>
-                    </ion-button>
-                    <ion-button slot="end" class="no-margin no-padding" (click)="onDeleteConfirm(event);">
-                      <ion-icon size="small" name="trash"></ion-icon>
-                    </ion-button>
-                </ion-header>
-                <p class=" no-margin italic"> {{ event.data_horario }}  </p>
-                <p class="no-margin"><strong>Carga Horária:</strong> {{ event.carga_horaria }}</p>
-              </ion-label>
+              
+                <ion-card [routerLink]="['/detail-event',event.id]" *ngFor = "let event of events" class="background ion-justify-content-between ion-padding ion-margin"> 
+                  <ion-row size-md="6" size-lg="6" size-xl="6">
+                    <ion-col class="vertical-divider" size="2">
+                      <ion-text>
+                        <h1 class="ion-no-margin">{{ getDay(event.data_horario) }} </h1>
+                      </ion-text>
+                      <ion-text class="ion-no-padding ion-no-margin">
+                        <h4 class="ion-no-padding ion-no-margin">{{ getMonth(event.data_horario) }} </h4>
+                      </ion-text>
+                    </ion-col>
+
+                    <ion-col class="ion-justify-content-center">
+                      <ion-text>
+                        <p class="ion-no-padding ion-no-margin">{{ event.titulo }}</p>
+                      </ion-text>
+                      <!-- {{ event.data_horario }}  -->
+                     </ion-col>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-end">
+                    <!-- <strong>Carga Horária:</strong> {{ event.carga_horaria }} -->
+                    <h4 class="hour ion-no-padding ion-no-margin">{{ getHour(event.data_horario) }}</h4>
+                  </ion-row>
+                  
+                </ion-card>
              
-              <ion-button fill="clear" [routerLink]="['/detail-event',event.id]">
-                <ion-icon size="small" name="arrow-forward"></ion-icon>
-              </ion-button>
-             
-            </ion-item>
 
           </ion-item-sliding>
-
-        </ion-item-group>
     </ion-list>
     
 </ion-content>
 
 
-<div *ngIf="!error && !events">
+<div class="waiting" *ngIf="!error && !events">
  <ion-text><p>Carregando...</p></ion-text>
 </div>
 
-<div *ngIf="error">
+<div class="waiting" *ngIf="error">
   <ion-text><p>Erro ao consultar eventos, tente novamente mais tarde<p></ion-text>
   <ion-button (click)="refresh();">tentar novamente</ion-button> 
 </div>
-<!--
-  <ion-item *ngFor = "let event of events">
-    {{ event.id}}, {{ event.title }}, {{ event.location }}
-  </ion-item>
-</ion-list> -->

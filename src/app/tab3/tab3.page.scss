@@ -1,12 +1,37 @@
+ion-text {
+    h1 {
+        font-size: 27px;
+        color: #00A295 ;
+        font-weight: bold;
+    }
+    h4{
+        margin-top: -5px;
+        color: #00A295 ;
+    }
+    p{  
+        margin-top: 12px;
+        color: #00A295;
+    }
+}
+
+ion-row {
+    h4.hour {
+        margin-top: -10px;
+        color: #F9C5AF;
+        font-style: italic;
+    }
+}
+
 ion-header {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
 
 .italic {
     font-style: italic;
 }
 
-div {
+div.waiting {
     margin: 0px 20px 0px 20px;
     overflow: hidden;
     height: 100%;
@@ -16,6 +41,16 @@ div {
     justify-content: center;
     text-align: center;
     
+}
+
+.background {
+    // background-color:#00A295 ; 
+    //  #F9C5AF #3D3266;
+    border-radius: 10px;
+}
+
+.vertical-divider {
+    border-right: 3px solid #F9C5AF;
 }
 
 

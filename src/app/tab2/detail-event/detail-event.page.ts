@@ -5,6 +5,9 @@ import { EventService } from 'src/app/services/event/event.service';
 import { Event } from 'src/app/models/models';
 import { UserService } from 'src/app/services/user/user.service';
 import { AlertService, ToastColor } from 'src/app/services/alert/alert.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { environment } from 'src/environments/environment';
+
 
 
 
@@ -15,7 +18,10 @@ import { AlertService, ToastColor } from 'src/app/services/alert/alert.service';
 })
 export class DetailEventPage implements OnInit {
 
+
   public subscribed: boolean;
+  public actualRole: string;
+  public api: string = environment.API;
 
   public event: Event = {
     id : null,
@@ -33,13 +39,17 @@ export class DetailEventPage implements OnInit {
   }
 
   constructor (
-    private eventService: EventService,
-    private userService: UserService,
     private route: ActivatedRoute,
-    private alertService: AlertService
+    private authService: AuthService,
+    private userService: UserService,
+    private alertService: AlertService,
+    private eventService: EventService,
   ) { }
 
   ngOnInit() {
+    this.authService.checkRole().then((value)=>{
+      this.actualRole = value;
+    });
     this.route.params.subscribe (
       (params: any) => {
         const id = params['id'];
@@ -56,7 +66,6 @@ export class DetailEventPage implements OnInit {
         
       }
     );
-
 
   }
 
@@ -82,5 +91,28 @@ export class DetailEventPage implements OnInit {
         this.alertService.presentToast("Ocorreu um erro ao solicitar remoção do evento. Tente novamente", ToastColor.DAN)
       }
     );
+  }
+
+  openInputFile(): void {
+    document.getElementById('image').click()
+  }
+
+  updateEventImage(event: any): void {
+      if (event.target.files && event.target.files[0]) {
+        const selectedFiles = <FileList> event.srcElement.files;
+        this.eventService.updateImageEvent(this.event.id,selectedFiles[0]).subscribe((value:any)=>{
+          this.previewImage(selectedFiles[0]);
+        },
+        (err)=>{console.log(err)});
+      }
+  }
+
+  previewImage(file: any){
+    const image = document.getElementById('foto') as HTMLImageElement;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = function (e) {
+      image.src = e.target.result as string;
+    };
   }
 }
