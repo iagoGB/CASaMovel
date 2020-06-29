@@ -1,6 +1,6 @@
 <ion-content>
   <div class="container">
-    <ion-img src="../assets/images/casaLogin.png"></ion-img>
+    <ion-img style="margin-bottom: 10px;" src="../assets/images/PAAP_Logo.png"></ion-img>
     <ion-item>
       <ion-label class="stacked" position="stacked">Email</ion-label>
       <ion-input type="text" [(ngModel)]="authUser.email"></ion-input>
@@ -10,12 +10,14 @@
       <ion-input type="password" [(ngModel)]="authUser.senha" (keydown.enter)="login(authUser)"></ion-input>
     </ion-item>
     <ion-button class="btn" size="large" expand="full"  shape="round"  (click)="login(authUser);">Acessar</ion-button>
-    <ion-item lines="none">
+    <!-- <ion-item lines="none">
       <ion-checkbox></ion-checkbox>
       <ion-label class="check" position="fixed">Salvar dados</ion-label>
     </ion-item>
     <ion-item lines="none">
         <ion-icon name="information-circle"></ion-icon> <ion-text>Não possui conta? Cadastre-se </ion-text>   <a href="#">aqui!</a>
-    </ion-item>
+    </ion-item> -->
+    <ion-img class="footer" src="../assets/images/PAAP_Assinatura.png"></ion-img>
   </div>
+  
 </ion-content>

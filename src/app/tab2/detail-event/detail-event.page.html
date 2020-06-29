@@ -6,29 +6,44 @@
 </ion-header>
 
 <ion-content>
-  <ion-title class="ion-text-center  ion-text-justify text-wrap">
-    <!-- <ion-icon class="calendar" size="large" name="calendar-outline"></ion-icon> -->
-    {{ event.titulo }}
-  </ion-title>
   <ion-img class="ion-padding"  *ngIf="event" [src]="api + '/evento/imagem/'+ event.foto" error="this.src='../assets/images/PAAP.png'" id="foto"></ion-img> 
   <input style="display: none" type="file" name="image" id="image" (change)="updateEventImage($event);" #imageUpdate>
-  <ion-button  *ngIf="actualRole === 'ADMIN'" (click)="openInputFile();">Alterar Foto</ion-button>
-  <ion-card class="ion-padding" *ngIf="event">
-    
+  <div class="button">
+    <ion-button  *ngIf="actualRole === 'ADMIN'" (click)="openInputFile();">Alterar Foto</ion-button>
+  </div>
+  
+  <ion-card class="ion-padding ion-margin-bottom" *ngIf="event">
+    <div class="title">
+      <div class="icon-center">
+        <ion-icon  class="calendar" size="large" name="calendar-outline"></ion-icon> 
+      </div>
+      <div class="ion-no-padding ion-no-margin">
+        <ion-text class="ion-text-center">
+          <strong><h5>{{ event.titulo }}</h5></strong>
+        </ion-text>
+      </div>
+    </div>
     <div class="row">
-      
-      <ion-icon size="large" name="location-outline"></ion-icon> 
+      <ion-icon  name="location-outline"></ion-icon> 
       <div>
         <!-- <span class="label">Local: </span> -->
         <span slot="end">{{ event.localizacao }}</span>
       </div>
       
     </div>
-    <p *ngFor="let palestrante of event.palestrante">{{ palestrante }}</p>
+    <div class="row">
+      <ion-icon name="megaphone-outline"></ion-icon>
+
+      <div class="pal" *ngFor="let palestrante of event.palestrantes">
+        <!-- <span class="label">Local: </span> -->
+        <span slot="end">{{ palestrante }}</span>
+      </div>
+      
+    </div> 
 
     <div  class="row">
     
-      <ion-icon size="large" name="time-outline"></ion-icon>
+      <ion-icon  name="time-outline"></ion-icon>
       <div>
         <!-- <span class="label">Data: </span> -->
         <span>{{ event.data_horario}}</span>
@@ -36,7 +51,7 @@
       
     </div>
     <div  class="row">
-      <!-- <ion-icon size="large" name="time-outline"><sup><ion-icon name="arrow-up-outline"></ion-icon></sup></ion-icon> -->
+      <!-- <ion-icon size="small" name="time-outline"><sup><ion-icon name="arrow-up-outline"></ion-icon></sup></ion-icon> -->
       <span class="label">Carga Horária: </span>
       <div>
         <span>{{ event.carga_horaria }}h</span>
