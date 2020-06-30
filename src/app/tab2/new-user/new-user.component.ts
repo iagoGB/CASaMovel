@@ -49,9 +49,9 @@ export class NewUserComponent implements OnInit {
           null, 
           [
             Validators.required,
-            Validators.email
-          ], 
-          this.userNotTakenService.checkUsernameTaken()
+            Validators.email]
+          // ], 
+          // this.userNotTakenService.checkUsernameTaken()
         ),
         senha: new FormControl(null, Validators.required),
         departamento: new FormControl(null, Validators.required)
@@ -85,11 +85,11 @@ export class NewUserComponent implements OnInit {
       this.userService.createUser(this.newUser).subscribe(
         resp => {
           this.alertService.presentToast(resp.toString(),ToastColor.DARK)
-          console.log('Deu certo o observable');
+          console.log('Usuário criado com sucesso!');
         },
         erro => {
           this.alertService.presentToast(erro,ToastColor.DAN);
-          console.log('Não Deu certo o observable');
+          console.log('Ocorreu um erro ao criar novo usuário');
         }
       );
         

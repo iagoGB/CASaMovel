@@ -41,4 +41,16 @@ export class Tab2Page {
       erro => { this.alertService.presentToast(erro.message, ToastColor.DAN);}
     );
   }
+
+  ionViewWillEnter(){
+    this.userService.loadUser()
+    .subscribe( 
+      resp => { this.profileUser = resp.body;  console.log(resp); },
+      erro => { this.alertService.presentToast(erro.message, ToastColor.DAN);}
+    );
+  }
+
+  getHours (date:string ): string {
+    return date.split(":")[0]+"h";
+  }
 }

@@ -17,7 +17,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Carga Horária Concluída</ion-label>
-      <ion-text>{{ profileUser.carga_horaria === null ? '0' : profileUser.carga_horaria }}h / 64h</ion-text>
+      <ion-text>{{ profileUser.carga_horaria === null ? '0' : getHours(profileUser.carga_horaria) }} / 64h</ion-text>
     </ion-item>
   </div>
 </ion-content>

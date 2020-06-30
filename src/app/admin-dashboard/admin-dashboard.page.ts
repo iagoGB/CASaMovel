@@ -13,6 +13,7 @@ export class AdminDashboardPage implements OnInit {
   public usuarioExpanded: boolean = false;
   public ajudaExpanded: boolean = false;
   public outrosExpanded: boolean = false;
+  public palestranteExpanded: boolean = false;
 
   constructor(
     public authService: AuthService

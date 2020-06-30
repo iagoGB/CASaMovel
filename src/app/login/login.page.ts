@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
           }
         })
       },
-      erro => this.alertService.presentToast(erro.message, ToastColor.DAN)
+      erro => this.alertService.presentToast("Não foi possivel efetuar login", ToastColor.DAN)
     );
   }
 }

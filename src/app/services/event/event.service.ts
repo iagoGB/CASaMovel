@@ -158,7 +158,7 @@ export class EventService {
       return this.http.put<Event>(
         `${this.url}/${qrcoderesult[1]}/registro-presenca`,
         // Username único,     id do evento
-        { keyword: qrcoderesult[0], username: result[1] },
+        { keyword: qrcode, username: result[1] },
         { headers: this.setHeaders(result[0]) , observe: 'response', params: { username: result[1] }, responseType:'json'}
       );
     }));
