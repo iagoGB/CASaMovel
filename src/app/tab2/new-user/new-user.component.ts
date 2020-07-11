@@ -65,7 +65,7 @@ export class NewUserComponent implements OnInit {
   //Checkar arquivos
   inputFileChange(event){
     if (event.target.files && event.target.files[0]){
-      const img = event.taret.files[0];
+      const img = event.target.files[0];
     }
   }
   //Função para criação do usuário
@@ -74,32 +74,16 @@ export class NewUserComponent implements OnInit {
       //Se o formulario estiver inválido, diga ao usuário
       console.log(this.formulario.status);
       console.log(this.formulario.value);
-      console.log("Formulario invalido");
       this.alertService.presentToast("Formulário inválido, por favor preecha corretamente os campos",ToastColor.DAN);
     } 
     else {
       //Se o formulario estiver válido, mova para a variável evento 
       this.newUser = this.formulario.value;
-      
       //Envie para o servidor
       this.userService.createUser(this.newUser).subscribe(
-        resp => {
-          this.alertService.presentToast(resp.toString(),ToastColor.DARK)
-          console.log('Usuário criado com sucesso!');
-        },
-        erro => {
-          this.alertService.presentToast(erro,ToastColor.DAN);
-          console.log('Ocorreu um erro ao criar novo usuário');
-        }
+        () => this.alertService.presentToast("Usuário criado com sucesso!",ToastColor.DARK),
+        erro => this.alertService.presentToast(erro,ToastColor.DAN) 
       );
-        
-      
-      console.log(this.formulario);
-      //Informe ao usuário que o evento foi criado
-      
-      //Retorne pra tela de eventos
-      
-      /* Falta incluir  travativa de erros */
     }
 
   }

@@ -52,7 +52,7 @@ div.row {
 
 div.end {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .btnSpace {
@@ -82,4 +82,9 @@ ion-icon {
 
 .pal {
     display: flex;
+    flex-direction: column;
+}
+
+.pal span {
+    text-align: end;
 }

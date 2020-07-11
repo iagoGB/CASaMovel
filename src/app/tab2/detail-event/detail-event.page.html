@@ -34,9 +34,9 @@
     <div class="row">
       <ion-icon name="megaphone-outline"></ion-icon>
 
-      <div class="pal" *ngFor="let palestrante of event.palestrantes">
+      <div class="pal" >
         <!-- <span class="label">Local: </span> -->
-        <span slot="end">{{ palestrante }}</span>
+        <span *ngFor="let palestrante of event.palestrantes" slot="end">{{ palestrante }}</span>
       </div>
       
     </div> 
@@ -72,11 +72,17 @@
         <ion-icon size="large" class="cancel-filled" name="close-circle-outline"></ion-icon>
       </div>
     </div>
-    <!-- <ion-button size="block"  color="danger" (click)="unsubscribeToEvent(event.id)" *ngIf="subscribed else subscribeButton ">CANCELAR INSCRIÇÃO</ion-button>
-  
-    <ng-template #subscribeButton>
-      <ion-button size="block" (click)="subscribeToEvent(event.id)">PARTICIPAR</ion-button>
-    </ng-template> -->
+    <div  class="row" *ngIf="actualRole === 'ADMIN'">
+      <div>
+        <ion-icon name="people-outline"></ion-icon>
+        
+      </div>
+      
+      <div class="pal">
+        <span class="ion-margin-bottom"><strong>Quantidade:</strong> {{ event.participantes.length }}</span>
+        <span *ngFor="let participante of event.participantes">{{ participante }}</span>
+      </div>
+    </div>
   </ion-card>
  
 </ion-content>

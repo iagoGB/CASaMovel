@@ -33,11 +33,13 @@ export class DetailEventPage implements OnInit {
     titulo: '',
     data_horario: null,
     local: '',
-    categoria: null,
-    palestrante: [""],
+    categorias: null,
+    palestrantes: [""],
+    participantes:[],
     carga_horaria: 0,
     criado_em: null,
     atualizado_em: null,
+
 
   }
 

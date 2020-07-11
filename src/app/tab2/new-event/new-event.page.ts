@@ -21,14 +21,17 @@ export class NewEventPage implements OnInit {
   public speakers: Palestrante[];
   public minDate = new Date().toISOString();
 
+  public event: Event;
+
   public newEvent: Event = {
     id: null,
     imagem: "",
     titulo: "",
     local: "",
     foto: '',
-    categoria: null,
-    palestrante: [""],
+    categorias: null,
+    palestrantes: [""],
+    participantes: null,
     data_horario: null,
     carga_horaria: 0,
     criado_em: null,

@@ -21,8 +21,9 @@ export class EditEventPage implements OnInit {
     imagem: null,
     titulo: "",
     local: "",
-    categoria: null,
-    palestrante: [""],
+    categorias: null,
+    palestrantes: [""],
+    participantes: null,
     data_horario: null, 
     carga_horaria:0, 
     criado_em: null,
@@ -41,12 +42,7 @@ export class EditEventPage implements OnInit {
     this.route.params.subscribe(
       (params: any) => {
         const id = params['id'];
-        console.log(id);
-        const event$ = this.http.loadByID(id);
-        event$.subscribe (
-          event => { 
-            this.updateInput(event);
-        });
+        this.http.loadByID(id).subscribe ( event => this.updateInput(event) );
       }
     );
   }
@@ -55,7 +51,7 @@ export class EditEventPage implements OnInit {
     this.newEvent.id = data.id;
     this.newEvent.titulo = data.title;
     this.newEvent.local = data.local;
-    this.newEvent.palestrante = data.palestrante;
+    this.newEvent.palestrantes = data.palestrantes;
     this.newEvent.carga_horaria = data.carga_horaria;
     this.newEvent.data_horario = data.data_horario; 
     this.newEvent.criado_em = data.criado_em;

@@ -4,10 +4,11 @@ export interface Event {
     "id": number,
     "imagem": string,
     "foto": string,
-    "categoria": number,
+    "categorias": string,
     "titulo": string,
     "local": string,
-    "palestrante": string[],
+    "palestrantes": string[],
+    "participantes":string[],
     "carga_horaria":number;
     "data_horario": Date,
     "criado_em": Date,
