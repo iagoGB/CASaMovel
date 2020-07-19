@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="end">Palestrantes</ion-title>
+    <ion-back-button slot="start"  [defaultHref]="['/admin-dashboard']"></ion-back-button>  <!--text="Voltar"-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngFor="let palestrante of palestrantes">
+    {{palestrante.id}} {{palestrante.nome}} {{palestrante.descricao}} {{palestrante.foto}}
+  </ion-item>
+</ion-content>

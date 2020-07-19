@@ -1,4 +1,3 @@
-import { stringify } from '@angular/compiler/src/util';
 
 export interface Event {
     "id": number,
@@ -51,5 +50,6 @@ export interface Categoria {
 export interface Palestrante {
     "id": number,
     "nome": string,
-    "desc": string
+    "descricao": string,
+    "foto": string
 }

@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { AlertService, ToastColor } from 'src/app/services/alert/alert.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
+import { DateFormatterService } from 'src/app/services/date-formatter/date-formatter.service';
 
 
 
@@ -22,9 +23,7 @@ export class DetailEventPage implements OnInit {
   public subscribed: boolean;
   public actualRole: string;
   public api: string = environment.API;
-  public months: string[] = [ 
-    "Janeiro", "Fevereiro", "Março","Abril", "Maio", "Junho", "Julho","Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" 
-  ]
+  
 
   public event: Event = {
     id : null,
@@ -49,12 +48,11 @@ export class DetailEventPage implements OnInit {
     private userService: UserService,
     private alertService: AlertService,
     private eventService: EventService,
+    public dateService: DateFormatterService
   ) { }
 
   ngOnInit() {
-    this.authService.checkRole().then((value)=>{
-      this.actualRole = value;
-    });
+    this.authService.checkRole().then( value => this.actualRole = value );
     this.route.params.subscribe (
       (params: any) => {
         const id = params['id'];
@@ -63,12 +61,9 @@ export class DetailEventPage implements OnInit {
         event$.subscribe (
           data => {
             this.event = data.body;
-            this.userService.loadUser().subscribe( (resp)=>{
-              this.subscribed = resp.body.eventos.some(event => event.id === this.event.id);
-            })
+            this.userService.loadUser().subscribe( (resp) => this.subscribed = resp.body.eventos.some(event => event.id === this.event.id))
           }
         );
-        
       }
     );
 
@@ -77,25 +72,24 @@ export class DetailEventPage implements OnInit {
   subscribeToEvent(id: number) : void {
     this.eventService.subscribeToEvent(id)
       .subscribe ((value) => {
-        this.alertService.presentToast("Você foi inserido na lista de participantes",ToastColor.PRI);
-        this.subscribed = true;
+        this.feedbackAndUpdate("Você foi inserido na lista de participantes",true,ToastColor.PRI);
       },
-      (erro) => {
-        this.alertService.presentToast(erro, ToastColor.DAN)
-      }
+      (erro) => this.alertService.presentToast(erro, ToastColor.DAN)
     );
   }
 
   unsubscribeToEvent(id: number) : void {
     this.eventService.unsubscribeToEvent(id)
       .subscribe ((value) => {
-        this.alertService.presentToast("Você não está mais inscrito no evento",ToastColor.DARK);
-        this.subscribed = false;
+        this.feedbackAndUpdate("Você não está mais inscrito no evento",false,ToastColor.DARK)
       },
-      (erro) => {
-        this.alertService.presentToast("Ocorreu um erro ao solicitar remoção do evento. Tente novamente", ToastColor.DAN)
-      }
+      (erro) => this.alertService.presentToast("Ocorreu um erro ao solicitar remoção do evento. Tente novamente", ToastColor.DAN)
     );
+  }
+
+  private feedbackAndUpdate(msg: string, isSsubscribed: boolean, tColor: ToastColor) {
+    this.alertService.presentToast(msg,tColor);
+    this.subscribed = isSsubscribed;
   }
 
   openInputFile(): void {
@@ -103,13 +97,14 @@ export class DetailEventPage implements OnInit {
   }
 
   updateEventImage(event: any): void {
-      if (event.target.files && event.target.files[0]) {
-        const selectedFiles = <FileList> event.srcElement.files;
-        this.eventService.updateImageEvent(this.event.id,selectedFiles[0]).subscribe((value:any)=>{
-          this.previewImage(selectedFiles[0]);
-        },
-        (err)=>{console.log(err)});
-      }
+    if (event.target.files && event.target.files[0]) {
+      const selectedFiles = <FileList> event.srcElement.files;
+      this.eventService.updateImageEvent(this.event.id,selectedFiles[0])
+        .subscribe(
+          (value: any) => this.previewImage(selectedFiles[0]),
+          (err) => console.log(err)
+        );
+    }
   }
 
   previewImage(file: any){
@@ -121,29 +116,4 @@ export class DetailEventPage implements OnInit {
     };
   }
 
-  getDay( date:any ): string {
-    return new Date(date).getDate().toString();
-  }
-
-  getMonth( date: any ): string {
-    return this.months[ new Date(date).getMonth() ];
-  }
-
-  getYear( date: any ): string {
-    return new Date(date).getFullYear().toString();
-  }
-
-  getHour (date:any ): string {
-    console.log(new Date(date));
-    return new Date(date).getHours().toString()+"h";
-  }
-
-
-  getMinutes( date: any ): string {
-    return new Date(date).getMinutes().toString()+"m";
-  }
-
-  getData(data: any): string {
-    return this.getDay(data) + " de "+ this.getMonth(data)+ " de "+this.getYear(data)+", " + this.getHour(data)+this.getMinutes(data);
-  }
 }

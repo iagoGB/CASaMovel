@@ -19,7 +19,11 @@ const routes: Routes = [
   },
   {
     path:'new-user',
-    component: NewUserComponent
+    component: NewUserComponent,
+    canActivate: [AuthGuard],
+    data: {
+      role: ['ADMIN']
+    }
   },
   { 
     path: 'edit-event/:id',
@@ -44,6 +48,18 @@ const routes: Routes = [
       role: 'ADMIN'
     },
     loadChildren: () => import('./admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardPageModule)
+  },
+  {
+    path: 'new-speaker',
+    canActivate: [ AuthGuard ],
+    data: {
+      role: 'ADMIN'
+    },
+    loadChildren: () => import("./speaker/new-speaker/new-speaker.module").then( m => m.NewSpeakerPageModule)
+  },
+  {
+    path: 'speaker',
+    loadChildren: () => import('./speaker/speaker/speaker.module').then( m => m.SpeakerPageModule)
   }
 ];
 @NgModule({

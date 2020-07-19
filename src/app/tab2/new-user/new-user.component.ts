@@ -49,9 +49,9 @@ export class NewUserComponent implements OnInit {
           null, 
           [
             Validators.required,
-            Validators.email]
-          // ], 
-          // this.userNotTakenService.checkUsernameTaken()
+            Validators.email
+          ], 
+          this.userNotTakenService.checkUsernameTaken()
         ),
         senha: new FormControl(null, Validators.required),
         departamento: new FormControl(null, Validators.required)
@@ -59,7 +59,7 @@ export class NewUserComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    this.userService.nullToken();
+    // this.userService.nullToken();
   }
 
   //Checkar arquivos

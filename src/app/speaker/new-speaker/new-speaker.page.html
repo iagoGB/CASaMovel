@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="end">Novo Palestrante</ion-title>
+    <ion-back-button slot="start"  [defaultHref]="['/admin-dashboard']"></ion-back-button>  <!--text="Voltar"-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-avatar>
+    <img class="ion-padding"  src="../assets/images/default_avatar.png" error="this.src='../assets/images/default_avatar.png'" id="foto"/>
+  </ion-avatar>
+  <form [formGroup]="formulario">
+    <ion-item>
+      <ion-label color="primary" position="stacked">Nome</ion-label>
+      <ion-input  type="file" (change)="getFile($event)" formControlName="foto"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Nome</ion-label>
+      <ion-input  type="text" formControlName="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Descrição</ion-label>
+      <ion-input  type="text"  formControlName="descricao"></ion-input>
+    </ion-item>
+  </form>
+  <ion-button  [disabled]="formulario.pending || formulario.invalid" size="block"  type="submit" (click)="onSubmit();">CRIAR</ion-button>
+</ion-content>
+
